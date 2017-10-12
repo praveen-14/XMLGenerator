@@ -9,6 +9,7 @@
 #include <FileController.h>
 #include <QTableWidget>
 #include <QVariant>
+#include <CacheConfig.h>
 
 class Table;
 class TableController;
@@ -29,7 +30,7 @@ public:
     static MainWindow* mainWindow;
     static void createMainWindow();
 
-    void addTableController(XMLFileData xmlData);
+    void addTableController(XMLFileData *xmlData);
 
     Table* getTableModel(QTableWidget *tableWidget);
     FileController* getFileController(){return &fileController;}
@@ -64,6 +65,7 @@ private:
     Ui::MainWindow *ui;
     FileController fileController;
     QMap<QString, TableController*> tableControllerMap;
+    CacheConfig *cacheConfig = CacheConfig::getInstance();
 
 //    QList<QString> allProperties;
 //    QMap<QString, QList<QString>> XMLData = QMap<QString, QList<QString>>();

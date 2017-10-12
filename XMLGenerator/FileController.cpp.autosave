@@ -140,13 +140,13 @@ XMLFileData* FileController::loadFile()
     return allData;
 }
 
-void FileController::updateFieldValues(QString attributeName,QList<QString> valueSet){
-    QFile file("F:/Projects/MyProjects/XMLGenerator/FieldValues.csv");
-    if (file.open(QFile::WriteOnly | QFile::Append)){
-        QTextStream stream(&file);
-        foreach(QString value , valueSet){
-            stream << "\n" << attributeName << "," << value;
-        }
-        file.close();
-    }
-}
+//void FileController::updateFieldValues(QString attributeName,QList<QString> valueSet){
+//    QFile file("F:/Projects/MyProjects/XMLGenerator/FieldValues.csv");
+//    if (file.open(QFile::WriteOnly | QFile::Append)){
+//        QTextStream stream(&file);
+//        foreach(QString value , valueSet){
+//            stream << "\n" << attributeName << "," << value;
+//        }
+//        file.close();
+//    }
+//}

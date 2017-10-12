@@ -22,7 +22,8 @@ class Table
         void addField(QString field);
         QList<QString>* getAllFields(){ return &allFields;}
 
-        void addAttributeToModel(QMap<QString,QString> *attributeData);
+        QMap<QString,QList<QString>>* addAttributeToModel(QMap<QString,QString> *attributeData);
+        QMap<QString,QString>* addFieldToModel(QMap<QString,QString> *fieldData,QMap<int, QList<QString>> *fieldValues);
 
         QList<TableRow>* getRows(){ return &tableRows;}
 

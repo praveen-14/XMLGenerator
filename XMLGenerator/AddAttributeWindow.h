@@ -20,7 +20,6 @@ public:
     ~AddAttributeWindow();
     void initializeWindow();
     QMap<QString,QString>* getWindowData();
-    bool getNullable(){return nullable;}
 
 public slots:
     void saveData();
@@ -28,7 +27,6 @@ public slots:
 private:
     Ui::AddAttributeWindow *ui;
     QMap<QString,QString> windowData;
-    bool nullable = false;
 };
 
 #endif // ADDATTRIBUTEWINDOW_H

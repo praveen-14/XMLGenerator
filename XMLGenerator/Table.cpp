@@ -10,6 +10,9 @@ Table::~Table()
 }
 void Table::addCell(int row , int column , QString value, QList<QString> fieldValues){
     bool rowExists = false;
+    if(fieldValues.count()>0){
+        fieldValues.prepend("N/A");
+    }
 //    QList<TableRow*> *rowArrayPointer = this->getRows();
 //    while(rowArrayPointer < rowArrayPointer + this->getRows()->size())
     for ( QList<TableRow>::iterator tableRow = this->getRows()->begin(); tableRow != this->getRows()->end(); ++tableRow)
@@ -51,7 +54,7 @@ void Table::addAttribute(QString attributeName)
     this->getAllAttributes()->push_back(attributeName);
 }
 
-void Table::addAttributeToModel(QMap<QString,QString> *attributeData){
+QMap<QString,QList<QString>>* Table::addAttributeToModel(QMap<QString,QString> *attributeData){
     QList<QString> rawValueSet;
     QList<QString> valueSet;
     QString attributeName = (attributeData->find("attributeName")).value();
@@ -75,5 +78,22 @@ void Table::addAttributeToModel(QMap<QString,QString> *attributeData){
             this->addCell(row,this->getAllAttributes()->count()-1,"",valueSet);
         }
     }
+    QMap<QString,QList<QString>> *returnMap = new QMap<QString,QList<QString>>();
+    returnMap->insert(attributeName,valueSet);
+    return returnMap;
+}
 
+QMap<QString,QString>* Table::addFieldToModel(QMap<QString,QString> *fieldData,QMap<int, QList<QString>> *fieldValues){
+    this->addField(fieldData->find("displayName").value());
+    for(int column=0;column<this->getAllAttributes()->count();column++){
+        QList<QString> valueSet;
+        if(fieldValues->find(column) != fieldValues->end()){
+            valueSet = fieldValues->find(column).value();
+            this->addCell(this->getAllFields()->count()-1,column,fieldData->find(this->getAllAttributes()->at(column)).value(),valueSet);
+        }else{
+            this->addCell(this->getAllFields()->count()-1,column,fieldData->find(this->getAllAttributes()->at(column)).value(),valueSet);
+        }
+
+    }
+    return fieldData;
 }

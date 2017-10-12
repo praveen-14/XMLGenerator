@@ -27,8 +27,6 @@ void AddAttributeWindow::initializeWindow(){
     valuesSet->setPlaceholderText("values separated by commas. Example : value1(default),value2,value3..");
     valuesSet->setProperty("variableName","valueSpace");
     ui->formLayout->addRow("Value Space(optional)", valuesSet);
-    QCheckBox *checkBox = new QCheckBox("Can be empty",this);
-    ui->formLayout->addRow("", checkBox);
 }
 
 void AddAttributeWindow::saveData(){
@@ -48,14 +46,14 @@ void AddAttributeWindow::saveData(){
             iterator++;
         }
     }
-    QList<QCheckBox*> allCheckBoxes = ui->scrollAreaWidgetContents->findChildren<QCheckBox*>();
-    if (allCheckBoxes.count() > 0){
-        QList<QCheckBox*>::iterator iterator = allCheckBoxes.begin();
-        while(iterator != allCheckBoxes.end()){
-            if((*iterator)->checkState() == Qt::Checked){
+//    QList<QCheckBox*> allCheckBoxes = ui->scrollAreaWidgetContents->findChildren<QCheckBox*>();
+//    if (allCheckBoxes.count() > 0){
+//        QList<QCheckBox*>::iterator iterator = allCheckBoxes.begin();
+//        while(iterator != allCheckBoxes.end()){
+//            if((*iterator)->checkState() == Qt::Checked){
 //                windowData.insert("nullable",Qt);
-            }
-            iterator++;
-        }
-    }
+//            }
+//            iterator++;
+//        }
+//    }
 }

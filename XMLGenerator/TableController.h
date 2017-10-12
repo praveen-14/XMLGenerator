@@ -16,7 +16,7 @@
 class TableController
 {
     public:
-        TableController(QString filePath);
+        TableController();
         ~TableController();
 
         Table* getDataTable(){return &dataTable;}
@@ -28,11 +28,12 @@ class TableController
 //        void setFilePath(QString filePath){ this->filePath = filePath;}
 
 //        void createTable(QList<QList<QString>,QList<QString>,QList<QList<QString>>> XMLData);
-        void populateTableModel(Table *table , XMLFileData data);
+        void populateTableModel(XMLFileData *data,QList<FieldInfo*> *columnFieldInfo);
         QTableWidget* createTableView(QString fileName);
         void addAttributeToTableView(QString attributeName, QList<QString> valueSpace);
-        void addAttributeToModel(QMap<QString,QString> *attributeData);
-        void addFieldToTableView(QString attributeName, QList<QString> valueSpace);
+        QMap<QString,QList<QString>>* addAttributeToModel(QMap<QString,QString> *attributeData);
+        QMap<QString,QString>* addFieldToModel(QMap<QString,QString> *fieldData,QMap<int, QList<QString>> *fieldValues);
+        void addFieldToTableView(QString *fieldName, QMap<QString,QString> *fieldData, QMap<int,QList<QString>> *fieldValues);
 
     public slots:
     private:

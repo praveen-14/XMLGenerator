@@ -32,10 +32,11 @@ SOURCES += \
     Table.cpp \
     FileController.cpp \
     TableController.cpp \
-    AddAttributeWindow.cpp
+    AddAttributeWindow.cpp\
+    CacheConfig.cpp\
+    FieldInfo.cpp
 
 HEADERS += \
-        cacheConfigs.h \
     MainWindow.h \
     AddFieldWindow.h \
     TableRow.h \
@@ -43,7 +44,9 @@ HEADERS += \
     Table.h \
     FileController.h \
     TableController.h \
-    AddAttributeWindow.h
+    AddAttributeWindow.h\
+    CacheConfig.h\
+    FieldInfo.h
 
 FORMS += \
     AddFieldWindow.ui \

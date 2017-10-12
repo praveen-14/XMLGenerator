@@ -14,7 +14,7 @@ struct XMLFileData
     QList<QString> allFields;
     QList<QString> allAttributes;
     QList<QList<QString>> tableData;
-    QMap<QString,QList<QString>> valueSets;
+//    QMap<QString,QList<QString>> valueSets;
 };
 
 
@@ -25,11 +25,11 @@ class FileController
     public:
         FileController();
         ~FileController();
-        QMap<int, QList<QString>> loadFieldValues(QList<QString> allAttributes);
+        QMap<int, QList<QString>>* loadFieldValues(QList<QString> *allAttributes);
         void updateFieldValues(QString attributeName,QList<QString> valueSet);
 
     public slots:
-        XMLFileData loadFile();
+        XMLFileData* loadFile();
     private:
 };
 #endif // FILECONTROLLER_H

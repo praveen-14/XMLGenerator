@@ -7,7 +7,6 @@ data-type,MDT_STRING
 data-type,MDT_F64
 data-type,MDT_UI64
 data-type,MDT_UI32
-enumName,N/A
 enumName,SIDE
 enumName,CROSS_TYPE
 enumName,CAPACITY
@@ -28,11 +27,15 @@ show,true
 showZeros,false
 composite,false
 translate,false
-dtRawFmt,N/A
 dtRawFmt,4
 show,false
 showZeros,true
-sort,N/A
 sort,desc
 dtRawFmt,0
-enumName,
+d,d
+dsds,d
+dsds,d
+dsds,d
+dsds,d
+dsd,sd
+dsd,s

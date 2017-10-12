@@ -27,14 +27,20 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="addFieldButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>Add Field</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="addAttributeButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>Add Field Property</string>
           </property>
@@ -71,7 +77,7 @@
      <x>0</x>
      <y>0</y>
      <width>1093</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>
@@ -105,7 +111,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_2</sender>
+   <sender>addFieldButton</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>addField()</slot>
@@ -121,7 +127,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_3</sender>
+   <sender>addAttributeButton</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>addAttribute()</slot>

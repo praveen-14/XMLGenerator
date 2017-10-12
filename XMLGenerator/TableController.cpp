@@ -1,6 +1,6 @@
 #include <TableController.h>
 
-TableController::TableController(QString filePath)
+TableController::TableController()
 {
 //    this->filePath = filePath;
 }
@@ -16,23 +16,21 @@ TableController::~TableController()
 //}
 
 
-void TableController::populateTableModel(Table *table , XMLFileData data)
+void TableController::populateTableModel(XMLFileData *data,QList<*FieldInfo> *columnFieldInfo)
 {
-    QMap<int, QList<QString>> fieldValues = MainWindow::mainWindow->getFileController()->loadFieldValues(data.allAttributes);
-    foreach(QString columnHeader , data.allAttributes)
-    {
-        table->addAttribute(columnHeader);
-    }
-    foreach(QString rowHeader , data.allFields)
+    Table *table = this->getDataTable();
+    foreach(QString rowHeader , data->allFields)
     {
         table->addField(rowHeader);
     }
-    for(int row=0; row<data.tableData.length(); row++){
-        for(int column=0; column<data.tableData.at(row).length(); column++){
-            QString value = data.tableData.at(row).at(column);
+    for(int row=0; row<data->tableData.length(); row++){
+        for(int column=0; column<data->tableData.at(row).length(); column++){
+            QString value = data->tableData.at(row).at(column);
             QList<QString> valueSet;
-            if(fieldValues.find(column) != fieldValues.end()){
-                valueSet = (fieldValues.find(column)).value();
+            foreach(FieldInfo *fieldInfo,columnFieldInfo){
+                if(fieldInfo->name() == data->allAttributes.at(column)){
+                    valueSet = fieldInfo->dropDownValMap()->keys();
+                }
             }
 //            if(fieldValues.contains(column)){
 //                if(!(*(fieldValues.find(column))).contains(value)){
@@ -111,10 +109,37 @@ void TableController::addAttributeToTableView(QString attributeName, QList<QStri
                 comboBox->addItem(valueSpace.at(i));
             }
             tableWidget->setCellWidget(row,table->getAllAttributes()->count()-1, comboBox);
+        }else{
+            tableWidget->setItem(row,table->getAllAttributes()->count()-1,new QTableWidgetItem(""));
         }
     }
 }
 
-void TableController::addAttributeToModel(QMap<QString,QString> *attributeData){
-    dataTable.addAttributeToModel(attributeData);
+void TableController::addFieldToTableView(QString *fieldName, QMap<QString,QString> *fieldData, QMap<int,QList<QString>> *fieldValues){
+    QTableWidget *tableWidget = this->getTableView();
+    Table *table = this->getDataTable();
+    tableWidget->setRowCount(table->getAllFields()->size());
+    tableWidget->setVerticalHeaderLabels(*(table->getAllFields()));
+    int row = table->getAllFields()->count()-1;
+    for(int column=0; column<table->getAllAttributes()->count(); column++){
+        if(fieldValues->find(column) != fieldValues->end() && fieldValues->find(column).value().count()>0){
+            QList<QString> valueSet = fieldValues->find(column).value();
+            QComboBox *comboBox = new QComboBox();
+            for(int i=0;i<valueSet.count(); i++){
+                comboBox->addItem(valueSet.at(i));
+            }
+            comboBox->setCurrentIndex(valueSet.indexOf(fieldData->find(table->getAllAttributes()->at(column)).value()));
+            tableWidget->setCellWidget(row,column,comboBox);
+        }else{
+            tableWidget->setItem(row,column,new QTableWidgetItem(fieldData->find(table->getAllAttributes()->at(column)).value()));
+        }
+    }
+}
+
+QMap<QString,QList<QString>>* TableController::addAttributeToModel(QMap<QString,QString> *attributeData){
+    return this->getDataTable()->addAttributeToModel(attributeData);
+}
+
+QMap<QString,QString>* TableController::addFieldToModel(QMap<QString,QString> *fieldData,QMap<int, QList<QString>> *fieldValues){
+    return this->getDataTable()->addFieldToModel(fieldData,fieldValues);
 }
