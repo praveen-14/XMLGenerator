@@ -32,6 +32,9 @@ public:
 	bool isMandetory() const;
 	void setIsMandetory(bool isMandetory);
 
+    bool nullable() const;
+    void setNullable(bool nullable);
+
 	QString defaultVal() const;
 	void setDefaultVal(const QString &defaultVal);
 
@@ -48,6 +51,7 @@ private:
 	QString m_displayName;
 	FieldType m_fieldType;
 	bool m_isMandetory;
+    bool m_nullable;
 	QString m_defaultVal;
 	int m_minRange;
 	int m_maxRange;

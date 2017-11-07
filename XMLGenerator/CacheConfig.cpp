@@ -8,6 +8,7 @@
 #define XML_DISP_NAME_PROPERTY	"displayName"
 #define XML_FIELD_TYPE_PROPERTY "fieldType"
 #define XML_MANDETORY_PROPERTY	"isMandetory"
+#define XML_NULLABLE_PROPERTY	"nullable"
 #define XML_DEFAULT_PROPERTY	"default"
 #define XML_ITEM_PROPERTY		"item"
 #define XML_VALUE_PROPERTY		"value"
@@ -27,49 +28,105 @@ CacheConfig::~CacheConfig()
 {
 }
 
+void CacheConfig::addColumnField(FieldInfo *field)
+{
+    m_columnFieldsList.append(field);
+//    QDomDocument doc("tempCacheConfig.xml");
+//    QFile file("F:/Projects/My Projects/build-XMLGenerator-Desktop_Qt_5_9_0_MinGW_32bit-Debug/CacheXMLConfigs.xml");
+//    if (!file.open(QIODevice::ReadOnly)) {
+//        qDebug() << "Cannot open the file";
+//        return;
+//    }
+//    // Parse file
+//    if (!doc.setContent(&file)) {
+//       qDebug() << "Cannot parse the content";
+//       file.close();
+//       return;
+//    }
+//    file.close();
+
+//    // Modify content
+//    QDomNodeList columnFieldsArray = elementsByTagName("column_fields");
+//    if (roots.size() < 1) {
+//       qDebug() << "Cannot find root";
+//       return;
+//    }
+//    QDomNode columnFieldNode = columnFieldsArray.at(0);
+//    QDomNode newNode = new QDomNode();
+//    QDomElement newElement = newNode.toElement();
+//    newElement.setAttribute("name",field->name());
+//    newElement.setAttribute("displayName",field->displayName());
+//    newElement.setAttribute("fieldType",FieldType(field->fieldType()));
+//    newElement.setAttribute("default",field->defaultVal());
+//    if(field->isMandetory()){
+//        newElement.setAttribute("isMandetory","true");
+//    }else
+//        newElement.setAttribute("isMandetory","false");
+//    if(field->nullable()){
+//        newElement.setAttribute("nullable","true");
+//    }else
+//        newElement.setAttribute("nullable","false");
+//    if(field->fieldType() == FieldType::Integer){
+//        newElement.setAttribute("minRan","false");
+//        newElement.setAttribute("nullable","false");
+//    }
+//    // Then do the same thing for somechild
+//    ...
+
+//    // Save content back to the file
+//    if (!file.open(QIODevice::Truncate | QIODevice::WriteOnly)) {
+//        qDebug() << "Basically, now we lost content of a file";
+//        return;
+//    }
+//    QByteArray xml = doc.toByteArray();
+//    file.write(xml);
+//    file.close();
+}
 
 bool CacheConfig::init()
 {
     QFile inputFile("F:/Projects/My Projects/build-XMLGenerator-Desktop_Qt_5_9_0_MinGW_32bit-Debug/CacheXMLConfigs.xml");
-	if (inputFile.open(QIODevice::ReadOnly))
-	{
-        QXmlStreamReader reader(&inputFile);
-		while (!reader.atEnd())
-		{
-            reader.readNext();
-            if (reader.name().compare(QString("cache_fields"), Qt::CaseInsensitive) == 0)
-			{
-				qDebug() << "****************cache****************";
-                while (reader.readNextStartElement() && reader.name().compare(QString(XML_FIELD_PROPERTY), Qt::CaseInsensitive) == 0)
-				{
-					populateFieldInfo(&reader, &m_cacheFieldsList);
-				}
-			}
-            else if (reader.name().compare(QString("message_fields"), Qt::CaseInsensitive) == 0)
-			{
-				qDebug() << "****************message****************";
-				while (reader.readNextStartElement())
-				{
-					populateFieldInfo(&reader, &m_messageFieldsList);
-				}
-			}
-            else if (reader.name().compare(QString("column_fields"), Qt::CaseInsensitive) == 0)
-			{
-				qDebug() << "****************column****************";
-				while (reader.readNextStartElement())
-				{
-					populateFieldInfo(&reader, &m_columnFieldsList);
-				}
-			}
+    if (inputFile.open(QIODevice::ReadOnly))
+        {
+            QXmlStreamReader reader(&inputFile);
 
-		}
-		inputFile.close();
-	}
-	else
-	{
-		return false;
-	}
-	return true;
+            while (!reader.atEnd())
+            {
+                reader.readNext();
+
+                if (reader.name().compare(QString("cache_fields"), Qt::CaseInsensitive) == 0)
+                {
+                    qDebug() << "****************cache****************";
+                    while (reader.readNextStartElement() && reader.name().compare(QString(XML_FIELD_PROPERTY), Qt::CaseInsensitive) == 0)
+                    {
+                        populateFieldInfo(&reader, &m_cacheFieldsList);
+                    }
+                }
+                else if (reader.name().compare(QString("message_fields"), Qt::CaseInsensitive) == 0)
+                {
+                    qDebug() << "****************message****************";
+                    while (reader.readNextStartElement())
+                    {
+                        populateFieldInfo(&reader, &m_messageFieldsList);
+                    }
+                }
+                else if (reader.name().compare(QString("column_fields"), Qt::CaseInsensitive) == 0)
+                {
+                    qDebug() << "****************column****************";
+                    while (reader.readNextStartElement())
+                    {
+                        populateFieldInfo(&reader, &m_columnFieldsList);
+                    }
+                }
+
+            }
+            inputFile.close();
+        }
+        else
+        {
+            return false;
+        }
+        return true;
 }
 
 QList<FieldInfo*>* CacheConfig::cacheFieldList()
@@ -159,6 +216,7 @@ void CacheConfig::populateFieldInfo(QXmlStreamReader* reader, QList<FieldInfo*>*
 		info->setFieldType(FieldType(attrs.value(XML_FIELD_TYPE_PROPERTY).toInt()));
 		info->setDefaultVal(attrs.value(XML_DEFAULT_PROPERTY).toString());
 		info->setIsMandetory(attrs.value(XML_MANDETORY_PROPERTY).toString() == "true" ? true : false);
+        info->setNullable(attrs.value(XML_NULLABLE_PROPERTY).toString() == "true" ? true : false);
 
 		qDebug() << attrs.value(XML_NAME_PROPERTY).toString();
 
@@ -189,7 +247,6 @@ void CacheConfig::populateFieldInfo(QXmlStreamReader* reader, QList<FieldInfo*>*
 					reader->skipCurrentElement();
 				}
 			}
-			
 			//reader->readNextStartElement();
 			qDebug() << "End ***** <DropDown>";
 		}

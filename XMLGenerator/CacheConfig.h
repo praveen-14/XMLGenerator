@@ -2,6 +2,7 @@
 #include <QObject>
 #include "qxmlstream.h"
 #include "FieldInfo.h"
+#include <QDomDocument>
 
 class CacheConfig : QObject
 {
@@ -19,6 +20,8 @@ public:
 	int posForColumnName(QString name);
 	int posForMessageName(QString name);
 	int posForCacheName(QString name);
+
+    void addColumnField(FieldInfo *field);
 
 private:
 	CacheConfig(QObject *parent);

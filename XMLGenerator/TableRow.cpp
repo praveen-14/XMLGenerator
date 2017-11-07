@@ -11,13 +11,19 @@ TableRow::~TableRow()
 
 }
 
+void TableRow::setRowIndex(int row){
+    this->rowIndex = row;
+}
+
+QList<TableCell*>* TableRow::getRowCells(){
+    return &rowCells;
+}
+
+int TableRow::getRowIndex(){
+    return rowIndex;
+}
+
 void TableRow::addCell(TableCell *cell)
 {
-    this->getRowCells()->push_back(*cell);
-//    TableCell *cell = new TableCell(this->getRowIndex(),column);
-//    foreach(QString data , dataList)
-//    {
-//        cell->addData(data);
-//    }
-//    this->getRowCells()->push_back(cell);
+    this->getRowCells()->push_back(cell);
 }

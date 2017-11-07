@@ -1,0 +1,1577 @@
+ <Enums>
+    <Enum name = "ACCOUNT_TYPE" group = "" defaultVal = "">
+        <Item value = "0">ALL_ACCOUNTS </Item>
+        <Item value = "1">CLIENT </Item>
+        <Item value = "3">HOUSE </Item>
+    </Enum>
+    <Enum name = "ACTION" group = "" defaultVal = "">
+        <Item value = "0">NONE</Item>
+        <Item value = "1">ADD</Item>
+        <Item value = "2">REMOVE</Item>
+        <Item value = "3">FLAG_CHANGE</Item>
+        <Item value = "4">ACTION_REPLENISH</Item>
+        <Item value = "8">ACTION_UPDATE</Item>
+    </Enum>
+    <Enum name = "ALERT_CASE_CRITICALITY" group = "" defaultVal = "">
+        <Item value = "0">LEVEL-1</Item>
+        <Item value = "1">LEVEL-2</Item>
+        <Item value = "2">LEVEL-3</Item>
+    </Enum>
+    <Enum name = "ALERT_CASE_STATUS" group = "" defaultVal = "">
+        <Item value = "0">Active</Item>
+        <Item value = "1">Inactive</Item>
+        <Item value = "2">Expired</Item>
+    </Enum>
+    <Enum name = "ALERT_SOURCE" group = "" defaultVal = "">
+        <Item value = "0">Online</Item>
+        <Item value = "1">Pattern Mined</Item>
+        <Item value = "2">Collusion Mined</Item>
+    </Enum>
+    <Enum name = "ALERT_STATUS_NEW" group = "" defaultVal = "">
+        <Item value = "0">Open</Item>
+        <Item value = "1">Closed</Item>
+        <Item value = "2">Rejected</Item>
+        <Item value = "3">Explained</Item>
+        <Item value = "4">Watch</Item>
+        <Item value = "5">Referred</Item>
+        <Item value = "6">Queried </Item>
+        <Item value = "7">Case Created</Item>
+    </Enum>
+    <Enum name = "AL_ACTION" group = "" defaultVal = "">
+        <Item value = "1">Login</Item>
+        <Item value = "2">Logout</Item>
+        <Item value = "3">Force logout</Item>
+        <Item value = "4">Create</Item>
+        <Item value = "5">Delete</Item>
+        <Item value = "6">Modify</Item>
+        <Item value = "7">View</Item>
+        <Item value = "8">Evaluate</Item>
+        <Item value = "9">Print</Item>
+        <Item value = "10">Save</Item>
+        <Item value = "11">Copy</Item>
+        <Item value = "12">Load</Item>
+        <Item value = "13">Activate</Item>
+        <Item value = "14">Attach Diary Entry</Item>
+        <Item value = "15">Login Reject</Item>
+        <Item value = "16">Export</Item>
+        <Item value = "17">Query</Item>
+        <Item value = "18">Reset Password</Item>
+        <Item value = "19">Upload</Item>
+        <Item value = "20">Close</Item>
+        <Item value = "21">Play</Item>
+        <Item value = "22">Pause</Item>
+        <Item value = "23">Stop</Item>
+        <Item value = "24">Apply</Item>
+        <Item value = "25">Assign</Item>
+        <Item value = "26">Duplicate</Item>
+    </Enum>
+    <Enum name = "AL_ENT_TYPE" group = "" defaultVal = "">
+        <Item value = "1">Pattern Mold</Item>
+        <Item value = "2">Report Mold</Item>
+        <Item value = "3">Report Instance</Item>
+        <Item value = "4">Graph Mold</Item>
+        <Item value = "5">Graph Container</Item>
+        <Item value = "6">Query</Item>
+        <Item value = "7">Case Definition</Item>
+        <Item value = "8">Case</Item>
+        <Item value = "9">Relationship Criteria</Item>
+        <Item value = "10">Manual Relationship</Item>
+        <Item value = "11">Frontend</Item>
+        <Item value = "12">Field</Item>
+        <Item value = "13">Entity</Item>
+        <Item value = "14">Enumeration</Item>
+        <Item value = "15">Role</Item>
+        <Item value = "16">User</Item>
+        <Item value = "17">Data Store</Item>
+        <Item value = "18">Page</Item>
+        <Item value = "19">Rule</Item>
+        <Item value = "20">Pattern Template</Item>
+        <Item value = "21">Alert Management</Item>
+        <Item value = "22">User Threashould Group</Item>
+        <Item value = "23">Pattern Threshoulds</Item>
+        <Item value = "24">Manual Entry</Item>
+        <Item value = "25">Diary Entry</Item>
+        <Item value = "26">Replay Session</Item>
+        <Item value = "27">Time Zone</Item>
+        <Item value = "28">Calendar</Item>
+        <Item value = "29">Volume Info</Item>
+        <Item value = "31">Function</Item>
+        <Item value = "32">Password Policy</Item>
+        <Item value = "33">Field Set</Item>
+        <Item value = "34">Record</Item>
+        <Item value = "35">Report</Item>
+    </Enum>
+    <Enum name = "AL_SOURCE" group = "" defaultVal = "">
+        <Item value = "1">Investigation Manager</Item>
+        <Item value = "2">Surveillance Manager</Item>
+        <Item value = "3">System Manager</Item>
+        <Item value = "4">Market Replay</Item>
+        <Item value = "5">Reporting Workstation</Item>
+        <Item value = "6">Cofiguration Manager</Item>
+        <Item value = "7">Operations Manager</Item>
+    </Enum>
+    <Enum name = "AL_WINDOW" group = "" defaultVal = "">
+        <Item value = "0">UNSET</Item>
+        <Item value = "1">Alert Manager</Item>
+        <Item value = "2">Bid and Offer Graph</Item>
+        <Item value = "3">Instrument View</Item>
+        <Item value = "4">Firm View</Item>
+        <Item value = "5">Client View</Item>
+        <Item value = "6">Order Book</Item>
+        <Item value = "7">Orders Window</Item>
+        <Item value = "8">History Orders Window</Item>
+        <Item value = "9">Order History Window</Item>
+        <Item value = "10">Trades Window</Item>
+        <Item value = "11">History Trades Window</Item>
+        <Item value = "12">Trades History Window</Item>
+        <Item value = "13">Market Replay</Item>
+        <Item value = "14">User</Item>
+        <Item value = "15">Role</Item>
+        <Item value = "16">Time Zones</Item>
+        <Item value = "17">Password Policy</Item>
+        <Item value = "18">Threshold Entity</Item>
+        <Item value = "19">Instrument Thresholds</Item>
+        <Item value = "20">Segment Thresholds</Item>
+        <Item value = "21">Login</Item>
+        <Item value = "22">Reporting Workstation Main</Item>
+        <Item value = "23">Report Request Window</Item>
+        <Item value = "24">Preference Window</Item>
+        <Item value = "25">Sessions Window</Item>
+        <Item value = "26">Schedules Window</Item>
+        <Item value = "27">Report Schedule Window</Item>
+        <Item value = "28">Operations Manager Main</Item>
+        <Item value = "30">Add/Edit User Details Window</Item>
+        <Item value = "32">View Role Privileges Window</Item>
+        <Item value = "33">Add New Role Window</Item>
+        <Item value = "34">Edit Role Entities Window</Item>
+        <Item value = "35">Duplicate Role Window</Item>
+        <Item value = "37">Time Zone Details Window</Item>
+        <Item value = "39">Password Policy Details Window</Item>
+        <Item value = "41">Edit Thresholds Window</Item>
+        <Item value = "42">Bulk Upload Thresholds Window</Item>
+        <Item value = "43">Virtual Entity Window</Item>
+        <Item value = "44">Modify Rule Window</Item>
+        <Item value = "45">Manage Patterns Screen</Item>
+        <Item value = "46">Modify Pattern Status Window</Item>
+        <Item value = "47">Manual Entries Screen</Item>
+        <Item value = "48">New Manual Entry Window</Item>
+        <Item value = "49">Historical Benchmark Screen</Item>
+        <Item value = "50">Add New Historical Benchmark</Item>
+        <Item value = "51">Session Manager Window</Item>
+        <Item value = "52">Report Output Window</Item>
+        <Item value = "53">Windows Photo Viewer </Item>
+        <Item value = "54">Load Profile Window</Item>
+        <Item value = "55">Save Profile Window</Item>
+        <Item value = "56">Load Firms Watchlists Window</Item>
+        <Item value = "57">Load Trader Watchlists Window</Item>
+        <Item value = "58">Instrument Selector Window</Item>
+        <Item value = "59">Message Filters Window</Item>
+        <Item value = "60">Pause Points Window</Item>
+        <Item value = "61">Rule Editor Window</Item>
+        <Item value = "62">Value Filters Window</Item>
+        <Item value = "63">Trader Selector window </Item>
+        <Item value = "64">Firm Selector window </Item>
+        <Item value = "65">Event Logger Window</Item>
+        <Item value = "66">Ext. Event Logger window</Item>
+        <Item value = "67">Market Watch</Item>
+        <Item value = "68">Alerts Window</Item>
+        <Item value = "69">Announcements Window</Item>
+        <Item value = "70">Alert History Window</Item>
+        <Item value = "71">Case Manager</Item>
+        <Item value = "72">Case Creation Window</Item>
+        <Item value = "73">Assign User Window</Item>
+        <Item value = "74">Diary Entry Window</Item>
+        <Item value = "75">Alert Name Selection window</Item>
+        <Item value = "76">Amend Case Window</Item>
+        <Item value = "100">Surveillance Manager Main</Item>
+        <Item value = "104">Profile Manager</Item>
+        <Item value = "105">Filter</Item>
+        <Item value = "106">Watch History Instrument</Item>
+        <Item value = "107">Instrument Details Window</Item>
+        <Item value = "108">Firm Details Window</Item>
+        <Item value = "109">Trader Details Window</Item>
+        <Item value = "111">Watch History EOD</Item>
+    </Enum>
+    <Enum name = "ANONYMITY" group = "" defaultVal = "">
+        <Item value = "0">ANONYMOUS </Item>
+        <Item value = "1">NAMED </Item>
+    </Enum>
+    <Enum name = "BOOK_STATUS" group = "" defaultVal = "">
+        <Item value = "0">Session Start</Item>
+        <Item value = "3">Session End</Item>
+        <Item value = "4">Session Change Fail</Item>
+        <Item value = "5">Session Extend</Item>
+        <Item value = "6">Session Shorten</Item>
+        <Item value = "14">Market Close</Item>
+        <Item value = "15">Market Supsended</Item>
+        <Item value = "19">Marekt Open</Item>
+        <Item value = "20">Non Trading Day</Item>
+    </Enum>
+    <Enum name = "CAPACITY" group = "" defaultVal = "">
+        <Item value = "1">Riskless Principal</Item>
+        <Item value = "2">Principal</Item>
+        <Item value = "3">Agency</Item>
+    </Enum>
+    <Enum name = "CLIENT_ACCOUNT_TYPE" group = "" defaultVal = "">
+        <Item value = "0">Institutional</Item>
+        <Item value = "1">Individual</Item>
+    </Enum>
+    <Enum name = "CLOSING_PRICE_INDICATOR" group = "" defaultVal = "">
+        <Item value = "0">CPI_CLOSING_PRICE_UNAVAILABLE</Item>
+        <Item value = "1">CPI_CLOSING_AUCTION </Item>
+        <Item value = "2">CPI_LAST_AT </Item>
+        <Item value = "3">CPI_MID_POINT </Item>
+        <Item value = "4">CPI_LAST_UT </Item>
+        <Item value = "5">CPI_PREVIOUS_CLOSE </Item>
+        <Item value = "6">CPI_MANUAL</Item>
+    </Enum>
+    <Enum name = "CONTAINER" group = "" defaultVal = "">
+        <Item value = "1">Normal</Item>
+        <Item value = "2">Odd Lot</Item>
+        <Item value = "3">Market</Item>
+        <Item value = "7">Pegged Order Queue</Item>
+        <Item value = "10">Firm Quote</Item>
+    </Enum>
+    <Enum name = "CRITICALITY" group = "" defaultVal = "">
+        <Item value = "1">Level 1</Item>
+        <Item value = "2">Level 2</Item>
+        <Item value = "3">Level 3</Item>
+    </Enum>
+    <Enum name = "DELAY_MODE" group = "" defaultVal = "">
+        <Item value = "0">TIME_BASED</Item>
+        <Item value = "1">SOD_BASED</Item>
+        <Item value = "2">EOD_BASED</Item>
+        <Item value = "3">NOON</Item>
+    </Enum>
+    <Enum name = "ENABLE_DISABLE" group = "" defaultVal = "">
+        <Item value = "0">Disabled</Item>
+        <Item value = "1">Enabled</Item>
+    </Enum>
+    <Enum name = "ENTITY_DEP_TYPE" group = "" defaultVal = "">
+        <Item value = "0">Non Restricted</Item>
+        <Item value = "1">Restricted</Item>
+    </Enum>
+    <Enum name = "ENTITY_STATUS" group = "" defaultVal = "">
+        <Item value = "0">Active</Item>
+        <Item value = "1">Inactive</Item>
+        <Item value = "2">Disabled</Item>
+    </Enum>
+    <Enum name = "EVENT_STATUS" group = "" defaultVal = "">
+        <Item value = "-1">ES_undef</Item>
+        <Item value = "0">ES_Session Start</Item>
+        <Item value = "1">ES_Session End</Item>
+        <Item value = "2">ES_Session change Fail</Item>
+        <Item value = "3">ES_Session Extend</Item>
+        <Item value = "4">ES_Market Close</Item>
+        <Item value = "5">ES_Market Suspended</Item>
+        <Item value = "6">ES_Market Open</Item>
+        <Item value = "7">ES_New</Item>
+        <Item value = "8">ES_PFill</Item>
+        <Item value = "9">ES_Reject</Item>
+        <Item value = "10">ES_Expired</Item>
+        <Item value = "11">ES_Fill</Item>
+        <Item value = "12">ES_Cancel</Item>
+        <Item value = "13">ES_Amend</Item>
+    </Enum>
+    <Enum name = "EXEC_TYPE" group = "" defaultVal = "">
+        <Item value = "-1">Undefined</Item>
+        <Item value = "0">New</Item>
+        <Item value = "4">Cancelled</Item>
+        <Item value = "5">Amended</Item>
+        <Item value = "8">Rejected</Item>
+        <Item value = "12">Expired</Item>
+        <Item value = "13">Restated</Item>
+        <Item value = "14">Pending Replace</Item>
+        <Item value = "15">Fill</Item>
+        <Item value = "16">Trade Correct</Item>
+        <Item value = "17">Trade Cancel</Item>
+    </Enum>
+    <Enum name = "EXERCISE_STYLE" group = "" defaultVal = "">
+        <Item value = "0">European</Item>
+        <Item value = "1">American</Item>
+    </Enum>
+    <Enum name = "FIRM_STATUS" group = "" defaultVal = "">
+        <Item value = "0">Active</Item>
+        <Item value = "1">Suspended</Item>
+    </Enum>
+    <Enum name = "GROUP_TYPE" group = "" defaultVal = "">
+        <Item value = "1">MARKET</Item>
+        <Item value = "2">SECTOR</Item>
+    </Enum>
+    <Enum name = "INSTRUMENT_STATUS" group = "" defaultVal = "">
+        <Item value = "0">Active</Item>
+        <Item value = "1">Suspended</Item>
+        <Item value = "2">Inactive</Item>
+    </Enum>
+    <Enum name = "INSTRUMENT_TYPE" group = "" defaultVal = "" />
+    <Enum name = "INTERNAL_INSTRUMENT_TYPE" group = "" defaultVal = "">
+        <Item value = "1">Futures</Item>
+        <Item value = "3">Options</Item>
+        <Item value = "25">Equity</Item>
+        <Item value = "26">Warrants</Item>
+        <Item value = "27">Bonds</Item>
+    </Enum>
+    <Enum name = "INTERNAL_INSTUMENT_SUB_TYPE" group = "" defaultVal = "">
+        <Item value = "1">Outright</Item>
+        <Item value = "2">Spread</Item>
+        <Item value = "3">Call</Item>
+        <Item value = "4">Put</Item>
+    </Enum>
+    <Enum name = "IS_AGGRESSOR" group = "" defaultVal = "">
+        <Item value = "0">NOT_AGGRESSOR</Item>
+        <Item value = "1">AGGRESSOR</Item>
+    </Enum>
+    <Enum name = "LME_MARKET_ACTION" group = "" defaultVal = "" />
+    <Enum name = "LOAD_ID" group = "" defaultVal = "">
+        <Item value = "1">P1</Item>
+        <Item value = "2">P2</Item>
+        <Item value = "3">P3</Item>
+    </Enum>
+    <Enum name = "MANUAL_ENTRY" group = "" defaultVal = "">
+        <Item value = "0">NOT_MAPPED</Item>
+        <Item value = "1">RUMOURS</Item>
+        <Item value = "2">NEWS</Item>
+        <Item value = "4">CORPORATE_ACTIONS</Item>
+        <Item value = "5">ANNOUNCEMENTS</Item>
+    </Enum>
+    <Enum name = "MANUAL_ENTRY_STATUS" group = "" defaultVal = "">
+        <Item value = "1">SENT</Item>
+        <Item value = "2">PENDING</Item>
+        <Item value = "3">REMOVED</Item>
+        <Item value = "4">UNAPPROVED</Item>
+        <Item value = "5">REJECTED</Item>
+        <Item value = "11">LOGGED_ENTRY</Item>
+        <Item value = "12">EXPLAINED_ENTRY</Item>
+        <Item value = "13">REJECTED_ENTRY</Item>
+        <Item value = "14">VERIFIED_ENTRY</Item>
+    </Enum>
+    <Enum name = "MARKET_MAKER_STATUS" group = "" defaultVal = "">
+        <Item value = "0">INACTIVE</Item>
+        <Item value = "1">ACTIVE</Item>
+    </Enum>
+    <Enum name = "MARKET_STATUS" group = "" defaultVal = "">
+        <Item value = "0">Closed</Item>
+        <Item value = "1">Open</Item>
+    </Enum>
+    <Enum name = "MATCH_TYPE" group = "" defaultVal = "">
+        <Item value = "2">Off Book-Two Party TradeReport</Item>
+        <Item value = "4">REGULAR_TRADE</Item>
+        <Item value = "7">AUCTION_TRADE</Item>
+    </Enum>
+    <Enum name = "NA" group = "" defaultVal = "">
+        <Item value = "-9999999">DOUBLE_NOT_SET</Item>
+        <Item value = "-1">INT_NOT_SET</Item>
+        <Item value = "0">WRITE_HISTORY_DATA_NONE</Item>
+        <Item value = "1">YYYY</Item>
+        <Item value = "2">WRITE_HISTORY_DATA_NORA</Item>
+        <Item value = "3">WRITE_HISTORY_DATA_ORA_NORA</Item>
+        <Item value = "4">Watch</Item>
+        <Item value = "5">None</Item>
+        <Item value = "6">Re-Opening Auction Call</Item>
+        <Item value = "7">Regular Trading</Item>
+        <Item value = "8">Pre-Mandatory</Item>
+        <Item value = "9">Mandatory</Item>
+        <Item value = "10">Post-Mandatory</Item>
+        <Item value = "11">USER_PARAMETER</Item>
+        <Item value = "12">Waiting for Data</Item>
+        <Item value = "13">TK</Item>
+        <Item value = "14">VERIFIED_ENTRY</Item>
+        <Item value = "15">Closing Auction Call</Item>
+        <Item value = "16">Closing Price Publication</Item>
+        <Item value = "17">TEMP</Item>
+        <Item value = "18">Trader of the same brokerage</Item>
+        <Item value = "19">Trader&apos;s own account</Item>
+        <Item value = "20">Halt</Item>
+        <Item value = "21">TX</Item>
+        <Item value = "22">Resume Auction Call</Item>
+        <Item value = "23">Halt and Close</Item>
+        <Item value = "24">WX</Item>
+        <Item value = "25">Published</Item>
+        <Item value = "26">Cancelled</Item>
+        <Item value = "27">Agreed</Item>
+        <Item value = "28">Immediate Reported</Item>
+        <Item value = "29">Suspended</Item>
+        <Item value = "30">Triggered</Item>
+        <Item value = "31">MARKET_START</Item>
+        <Item value = "32">DR</Item>
+        <Item value = "33">DT</Item>
+        <Item value = "34">NORMAL_BOOK</Item>
+        <Item value = "35">OE</Item>
+        <Item value = "36">Passive</Item>
+        <Item value = "37">OL</Item>
+        <Item value = "38">ON</Item>
+        <Item value = "39">SEP_AGGRESSION</Item>
+        <Item value = "40">OU</Item>
+        <Item value = "41">OP</Item>
+        <Item value = "42">RFQ</Item>
+        <Item value = "43">UT</Item>
+        <Item value = "44">GC</Item>
+        <Item value = "45">NC</Item>
+        <Item value = "47">Manual Entries Screen</Item>
+        <Item value = "49">Historical Benchmark Screen</Item>
+        <Item value = "50">Firm Quote</Item>
+        <Item value = "51">GFX</Item>
+        <Item value = "52">GFS</Item>
+        <Item value = "53">Windows Photo Viewer </Item>
+        <Item value = "54">Load Profile Window</Item>
+        <Item value = "55">Save Profile Window</Item>
+        <Item value = "56">Load Firms Watchlists Window</Item>
+        <Item value = "57">Load Trader Watchlists Window</Item>
+        <Item value = "58">Instrument Selector Window</Item>
+        <Item value = "59">Message Filters Window</Item>
+        <Item value = "60">Pause Points Window</Item>
+        <Item value = "61">Rule Editor Window</Item>
+        <Item value = "62">Value Filters Window</Item>
+        <Item value = "63">Trader Selector window </Item>
+        <Item value = "64">Firm Selector window </Item>
+        <Item value = "65">Event Logger Window</Item>
+        <Item value = "66">Ext. Event Logger window</Item>
+        <Item value = "67">Market Watch</Item>
+        <Item value = "68">Alerts Window</Item>
+        <Item value = "69">Announcements Window</Item>
+        <Item value = "70">Alert History Window</Item>
+        <Item value = "71">Case Manager</Item>
+        <Item value = "72">Case Creation Window</Item>
+        <Item value = "73">Assign User Window</Item>
+        <Item value = "74">Diary Entry Window</Item>
+        <Item value = "75">Alert Name Selection window</Item>
+        <Item value = "76">Amend Case Window</Item>
+        <Item value = "79">AGGRESSOR_FIRM</Item>
+        <Item value = "80">TARGET_FIRM</Item>
+        <Item value = "92">SPECIALIST_REQUEST</Item>
+        <Item value = "100">Price Monitoring Extension</Item>
+        <Item value = "101">Manual</Item>
+        <Item value = "102">Suspended</Item>
+        <Item value = "103">SESSION_PARAMETER</Item>
+        <Item value = "104">Profile Manager</Item>
+        <Item value = "105">Filter</Item>
+        <Item value = "106">Watch History Instrument</Item>
+        <Item value = "107">Instrument Details Window</Item>
+        <Item value = "108">Firm Details Window</Item>
+        <Item value = "109">Trader Details Window</Item>
+        <Item value = "111">Watch History EOD</Item>
+        <Item value = "138">QUOTE_BID</Item>
+        <Item value = "139">QUOTE_ASK</Item>
+    </Enum>
+    <Enum name = "NEWS_TYPE" group = "" defaultVal = "">
+        <Item value = "0">MARKET</Item>
+        <Item value = "1">INSTRUMENT</Item>
+        <Item value = "2">GENERAL</Item>
+        <Item value = "3">NONE</Item>
+    </Enum>
+    <Enum name = "NEW_STRIKE_AVAILABILITY" group = "" defaultVal = "">
+        <Item value = "0">INTER_DAY</Item>
+        <Item value = "1">INTRA_DAY</Item>
+    </Enum>
+    <Enum name = "NOVATED_INDICATOR" group = "" defaultVal = "">
+        <Item value = "0">NI_SET_INTERNALIZED</Item>
+        <Item value = "1">NI_NORMAL</Item>
+    </Enum>
+    <Enum name = "OPENING_PRICE_INDICATOR" group = "" defaultVal = "">
+        <Item value = "0">Unavailable</Item>
+        <Item value = "1">Auction</Item>
+        <Item value = "2">Regular Trade</Item>
+        <Item value = "3">Mid-Point</Item>
+        <Item value = "4">Manual</Item>
+    </Enum>
+    <Enum name = "OPTION_TYPE" group = "" defaultVal = "">
+        <Item value = "3">Call</Item>
+        <Item value = "4">Put</Item>
+    </Enum>
+    <Enum name = "ORDER_STATUS" group = "" defaultVal = "">
+        <Item value = "0">New</Item>
+        <Item value = "1">Partial Fill</Item>
+        <Item value = "2">Fill</Item>
+        <Item value = "4">Cancelled</Item>
+        <Item value = "6">Expired</Item>
+        <Item value = "8">Rejected</Item>
+        <Item value = "9">Suspended</Item>
+        <Item value = "12">Pending New</Item>
+        <Item value = "15">Deactivated</Item>
+        <Item value = "16">Negotiated Fill</Item>
+    </Enum>
+    <Enum name = "ORDER_SUB_TYPE" group = "" defaultVal = "">
+        <Item value = "0">Order</Item>
+        <Item value = "3">Quote</Item>
+        <Item value = "5">Pegged Order</Item>
+        <Item value = "6">Limit Pegged Order</Item>
+        <Item value = "7">Cross Order</Item>
+        <Item value = "8">Negotiated Deal Off</Item>
+        <Item value = "50">Firm Quote</Item>
+    </Enum>
+    <Enum name = "ORDER_TYPE" group = "" defaultVal = "">
+        <Item value = "1">Market</Item>
+        <Item value = "2">Limit</Item>
+        <Item value = "3">Stop</Item>
+        <Item value = "4">Stop Limit</Item>
+    </Enum>
+    <Enum name = "PRODUCT_TYPE" group = "" defaultVal = "">
+        <Item value = "2">Derivative</Item>
+        <Item value = "25">Equity</Item>
+    </Enum>
+    <Enum name = "PUBLISH_INDICATOR" group = "" defaultVal = "">
+        <Item value = "0">PI_DO_NOT_PUBLISH</Item>
+        <Item value = "1">PI_IMMEDIATE</Item>
+        <Item value = "2">PI_DELAYED</Item>
+    </Enum>
+    <Enum name = "QUOTE_TYPE" group = "" defaultVal = "">
+        <Item value = "0">Invalid</Item>
+        <Item value = "1">Buy Only</Item>
+        <Item value = "2">Sell Only</Item>
+        <Item value = "3">Dual Sided</Item>
+    </Enum>
+    <Enum name = "RISK_LEVEL" group = "" defaultVal = "">
+        <Item value = "0">NO_RISK</Item>
+        <Item value = "1">RISKY</Item>
+        <Item value = "2">SUSPENDED</Item>
+    </Enum>
+    <Enum name = "RPC" group = "" defaultVal = "">
+        <Item value = "1">CACHE1</Item>
+        <Item value = "2">QUERY</Item>
+        <Item value = "3">CACHE3</Item>
+    </Enum>
+    <Enum name = "SESSION_TYPE" group = "" defaultVal = "">
+        <Item value = "0">Default</Item>
+        <Item value = "1">Market Open</Item>
+        <Item value = "2">Pre-Trading</Item>
+        <Item value = "3">Start of Trading</Item>
+        <Item value = "4">Grace Period</Item>
+        <Item value = "5">Opening Auction Call</Item>
+        <Item value = "6">Re-Opening Auction Call</Item>
+        <Item value = "7">Regular Trading</Item>
+        <Item value = "8">Pre-Mandatory</Item>
+        <Item value = "9">Mandatory</Item>
+        <Item value = "10">Post-Mandatory</Item>
+        <Item value = "11">Pre-Trade Reporting</Item>
+        <Item value = "12">Trade Reporting</Item>
+        <Item value = "13">Volatility Auction Call </Item>
+        <Item value = "14">Pre-Closing Auction Call</Item>
+        <Item value = "15">Closing Auction Call</Item>
+        <Item value = "16">Closing Price Publication</Item>
+        <Item value = "17">Closing Price Cross</Item>
+        <Item value = "18">Periodic Auction Call</Item>
+        <Item value = "19">Post Close</Item>
+        <Item value = "20">Halt</Item>
+        <Item value = "21">Pause</Item>
+        <Item value = "22">Resume Auction Call</Item>
+        <Item value = "23">Halt and Close</Item>
+        <Item value = "24">Market Close</Item>
+    </Enum>
+    <Enum name = "SIDE" group = "" defaultVal = "">
+        <Item value = "1">Buy</Item>
+        <Item value = "2">Sell</Item>
+    </Enum>
+    <Enum name = "SIZE_FORMULAE" group = "" defaultVal = "">
+        <Item value = "1">SYNTHETIC_SIZE</Item>
+    </Enum>
+    <Enum name = "SOURCE_OF_NEWS" group = "" defaultVal = "">
+        <Item value = "0">Operations Manager</Item>
+        <Item value = "1">Service Desk</Item>
+        <Item value = "2">External News Feed</Item>
+    </Enum>
+    <Enum name = "SSP_CREATION_CRITERIA" group = "" defaultVal = "">
+        <Item value = "0">Consecutive</Item>
+        <Item value = "1">Anchored to First Expiry</Item>
+        <Item value = "2">All Combinations</Item>
+        <Item value = "3">Same Expiration Period</Item>
+        <Item value = "4">Straddle</Item>
+        <Item value = "5">Strangle</Item>
+    </Enum>
+    <Enum name = "STATUS" group = "" defaultVal = "">
+        <Item value = "1">Active</Item>
+        <Item value = "2">Inactive</Item>
+        <Item value = "3">Expired</Item>
+        <Item value = "4">New</Item>
+        <Item value = "5">Amended</Item>
+        <Item value = "6">Cancelled</Item>
+        <Item value = "20">Matched</Item>
+        <Item value = "21">Reject</Item>
+        <Item value = "22">Acknowledged </Item>
+        <Item value = "23">Matched Publication</Item>
+        <Item value = "24">Pre-Released</Item>
+        <Item value = "25">Published</Item>
+        <Item value = "26">Cancelled</Item>
+        <Item value = "27">Agreed</Item>
+        <Item value = "28">Immediate Reported</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_ACCOUNT_TYPE" group = "" defaultVal = "">
+        <Item value = "0">ALL_ACCOUNTS </Item>
+        <Item value = "1">CLIENT </Item>
+        <Item value = "3">HOUSE </Item>
+    </Enum>
+    <Enum name = "SYS_MGR_ACTION" group = "" defaultVal = "">
+        <Item value = "0">NONE</Item>
+        <Item value = "1">ADD</Item>
+        <Item value = "2">REMOVE</Item>
+        <Item value = "3">FLAG_CHANGE</Item>
+        <Item value = "4">ACTION_REPLENISH</Item>
+        <Item value = "8">ACTION_UPDATE</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_ACTIVE_STATUS" group = "" defaultVal = "">
+        <Item value = "1">Active</Item>
+        <Item value = "2">Inactive</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_ACTIVITY_ACTION" group = "" defaultVal = "">
+        <Item value = "1">Login</Item>
+        <Item value = "2">Logout</Item>
+        <Item value = "3">Load</Item>
+        <Item value = "4">Save</Item>
+        <Item value = "5">Delete</Item>
+        <Item value = "6">Query</Item>
+        <Item value = "7">Export</Item>
+        <Item value = "8">Force Logout</Item>
+        <Item value = "9">Close</Item>
+        <Item value = "10">Add</Item>
+        <Item value = "11">Modify</Item>
+        <Item value = "12">Import</Item>
+        <Item value = "13">View</Item>
+        <Item value = "14">Schedule</Item>
+        <Item value = "15">Sort</Item>
+        <Item value = "16">Zoom</Item>
+        <Item value = "17">Reject</Item>
+        <Item value = "18">Lock</Item>
+        <Item value = "19">Create</Item>
+        <Item value = "20">Evaluate</Item>
+        <Item value = "21">Print</Item>
+        <Item value = "22">Activate</Item>
+        <Item value = "30">Cancel</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_ALERT_CASE_CRITICALITY" group = "" defaultVal = "">
+        <Item value = "0">LEVEL-1</Item>
+        <Item value = "1">LEVEL-2</Item>
+        <Item value = "2">LEVEL-3</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_ALERT_CASE_STATUS" group = "" defaultVal = "">
+        <Item value = "0">Active</Item>
+        <Item value = "1">Inactive</Item>
+        <Item value = "2">Expired</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_ALERT_SOURCE" group = "" defaultVal = "">
+        <Item value = "0">Online</Item>
+        <Item value = "1">Pattern Mined</Item>
+        <Item value = "2">Collusion Mined</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_ALERT_STATUS_NEW" group = "" defaultVal = "">
+        <Item value = "0">Open</Item>
+        <Item value = "1">Closed</Item>
+        <Item value = "2">Rejected</Item>
+        <Item value = "3">Explained</Item>
+        <Item value = "4">Watch</Item>
+        <Item value = "5">Referred</Item>
+        <Item value = "6">Queried</Item>
+        <Item value = "7">Case Created</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_ALTERNATE_SECURITY_TYPE" group = "" defaultVal = "">
+        <Item value = "0">EQUITY</Item>
+        <Item value = "1">NON-EQUITY</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_AL_ACTION" group = "" defaultVal = "">
+        <Item value = "1">Login</Item>
+        <Item value = "2">Logout</Item>
+        <Item value = "3">Force logout</Item>
+        <Item value = "4">Create</Item>
+        <Item value = "5">Delete</Item>
+        <Item value = "6">Modify</Item>
+        <Item value = "7">View</Item>
+        <Item value = "8">Evaluate</Item>
+        <Item value = "9">Print</Item>
+        <Item value = "10">Save</Item>
+        <Item value = "11">Copy</Item>
+        <Item value = "12">Load</Item>
+        <Item value = "13">Activate</Item>
+        <Item value = "14">Attach Diary Entry</Item>
+        <Item value = "15">Login Reject</Item>
+        <Item value = "16">Export</Item>
+        <Item value = "17">Query</Item>
+        <Item value = "18">Reset Password</Item>
+        <Item value = "19">Upload</Item>
+        <Item value = "20">Close</Item>
+        <Item value = "21">Play</Item>
+        <Item value = "22">Pause</Item>
+        <Item value = "23">Stop</Item>
+        <Item value = "24">Apply</Item>
+        <Item value = "25">Assign</Item>
+        <Item value = "26">Duplicate</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_AL_ENT_TYPE" group = "" defaultVal = "">
+        <Item value = "1">Pattern Mold</Item>
+        <Item value = "2">Report Mold</Item>
+        <Item value = "3">Report Instance</Item>
+        <Item value = "4">Graph Mold</Item>
+        <Item value = "5">Graph Container</Item>
+        <Item value = "6">Query</Item>
+        <Item value = "7">Case Definition</Item>
+        <Item value = "8">Case</Item>
+        <Item value = "9">Relationship Criteria</Item>
+        <Item value = "10">Manual Relationship</Item>
+        <Item value = "11">Frontend</Item>
+        <Item value = "12">Field</Item>
+        <Item value = "13">Entity</Item>
+        <Item value = "14">Enumeration</Item>
+        <Item value = "15">Role</Item>
+        <Item value = "16">User</Item>
+        <Item value = "17">Data Store</Item>
+        <Item value = "18">Page</Item>
+        <Item value = "19">Rule</Item>
+        <Item value = "20">Pattern Template</Item>
+        <Item value = "21">Alert Management</Item>
+        <Item value = "22">User Threashould Group</Item>
+        <Item value = "23">Pattern Threshoulds</Item>
+        <Item value = "24">Manual Entry</Item>
+        <Item value = "25">Diary Entry</Item>
+        <Item value = "26">Replay Session</Item>
+        <Item value = "27">Time Zone</Item>
+        <Item value = "28">Calendar</Item>
+        <Item value = "29">Volume Info</Item>
+        <Item value = "31">Function</Item>
+        <Item value = "32">Password Policy</Item>
+        <Item value = "33">Field Set</Item>
+        <Item value = "34">Record</Item>
+        <Item value = "35">Report</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_AL_SOURCE" group = "" defaultVal = "">
+        <Item value = "1">Investigation Manager</Item>
+        <Item value = "2">Surveillance Manager</Item>
+        <Item value = "3">System Manager</Item>
+        <Item value = "4">Market Replay</Item>
+        <Item value = "5">Reporting Workstation</Item>
+        <Item value = "6">Cofiguration Manager</Item>
+        <Item value = "7">Operations Manager</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_AL_WINDOW" group = "" defaultVal = "">
+        <Item value = "0">UNSET</Item>
+        <Item value = "1">Alert Manager</Item>
+        <Item value = "2">Bid and Offer Graph</Item>
+        <Item value = "3">Instrument View</Item>
+        <Item value = "4">Firm View</Item>
+        <Item value = "5">Client View</Item>
+        <Item value = "6">Order Book</Item>
+        <Item value = "7">Orders Window</Item>
+        <Item value = "8">History Orders Window</Item>
+        <Item value = "9">Order History Window</Item>
+        <Item value = "10">Trades Window</Item>
+        <Item value = "11">History Trades Window</Item>
+        <Item value = "12">Trades History Window</Item>
+        <Item value = "13">Market Replay</Item>
+        <Item value = "14">User</Item>
+        <Item value = "15">Role</Item>
+        <Item value = "16">Time Zones</Item>
+        <Item value = "17">Password Policy</Item>
+        <Item value = "18">Threshold Entity</Item>
+        <Item value = "19">Instrument Thresholds</Item>
+        <Item value = "20">Segment Thresholds</Item>
+        <Item value = "21">Login</Item>
+        <Item value = "22">Reporting Workstation Main</Item>
+        <Item value = "23">Report Request Window</Item>
+        <Item value = "24">Preference Window</Item>
+        <Item value = "25">Sessions Window</Item>
+        <Item value = "26">Schedules Window</Item>
+        <Item value = "27">Report Schedule Window</Item>
+        <Item value = "28">Operations Manager Main</Item>
+        <Item value = "30">Add/Edit User Details Window</Item>
+        <Item value = "32">View Role Privileges Window</Item>
+        <Item value = "33">Add New Role Window</Item>
+        <Item value = "34">Edit Role Entities Window</Item>
+        <Item value = "35">Duplicate Role Window</Item>
+        <Item value = "37">Time Zone Details Window</Item>
+        <Item value = "39">Password Policy Details Window</Item>
+        <Item value = "41">Edit Thresholds Window</Item>
+        <Item value = "42">Bulk Upload Thresholds Window</Item>
+        <Item value = "43">Virtual Entity Window</Item>
+        <Item value = "44">Modify Rule Window</Item>
+        <Item value = "45">Manage Patterns Screen</Item>
+        <Item value = "46">Modify Pattern Status Window</Item>
+        <Item value = "47">Manual Entries Screen</Item>
+        <Item value = "48">New Manual Entry Window</Item>
+        <Item value = "49">Historical Benchmark Screen</Item>
+        <Item value = "50">Add New Historical Benchmark</Item>
+        <Item value = "51">Session Manager Window</Item>
+        <Item value = "52">Report Output Window</Item>
+        <Item value = "53">Windows Photo Viewer</Item>
+        <Item value = "54">Load Profile Window</Item>
+        <Item value = "55">Save Profile Window</Item>
+        <Item value = "56">Load Firms Watchlists Window</Item>
+        <Item value = "57">Load Trader Watchlists Window</Item>
+        <Item value = "58">Instrument Selector Window</Item>
+        <Item value = "59">Message Filters Window</Item>
+        <Item value = "60">Pause Points Window</Item>
+        <Item value = "61">Rule Editor Window</Item>
+        <Item value = "62">Value Filters Window</Item>
+        <Item value = "63">Trader Selector window</Item>
+        <Item value = "64">Firm Selector window</Item>
+        <Item value = "65">Event Logger Window</Item>
+        <Item value = "66">Ext. Event Logger window</Item>
+        <Item value = "67">Market Watch</Item>
+        <Item value = "68">Alerts Window</Item>
+        <Item value = "69">Announcements Window</Item>
+        <Item value = "70">Alert History Window</Item>
+        <Item value = "71">Case Manager</Item>
+        <Item value = "72">Case Creation Window</Item>
+        <Item value = "73">Assign User Window</Item>
+        <Item value = "74">Diary Entry Window</Item>
+        <Item value = "75">Alert Name Selection window</Item>
+        <Item value = "76">Amend Case Window</Item>
+        <Item value = "100">Surveillance Manager Main</Item>
+        <Item value = "104">Profile Manager</Item>
+        <Item value = "105">Filter</Item>
+        <Item value = "106">Watch History Instrument</Item>
+        <Item value = "107">Instrument Details Window</Item>
+        <Item value = "108">Firm Details Window</Item>
+        <Item value = "109">Trader Details</Item>
+        <Item value = "111">Watch History EOD</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_ANONYMITY" group = "" defaultVal = "">
+        <Item value = "0">ANONYMOUS </Item>
+        <Item value = "1">NAMED </Item>
+    </Enum>
+    <Enum name = "SYS_MGR_BB/BO Setting" group = "" defaultVal = "">
+        <Item value = "0">BB_Increase</Item>
+        <Item value = "1">BB_Decrease</Item>
+        <Item value = "2">BO_Increase</Item>
+        <Item value = "3">BO_Decrease</Item>
+        <Item value = "4">BBO_No_Change</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_BOAT_ACTION" group = "" defaultVal = "">
+        <Item value = "0">New</Item>
+        <Item value = "1">Amend</Item>
+        <Item value = "2">Deletion</Item>
+        <Item value = "3">Password Amend</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_BOOK_STATUS" group = "" defaultVal = "">
+        <Item value = "0">Session Start</Item>
+        <Item value = "3">Session End</Item>
+        <Item value = "4">Session Change Fail</Item>
+        <Item value = "5">Change Schedule</Item>
+        <Item value = "6">Session Shorten</Item>
+        <Item value = "14">Market Close</Item>
+        <Item value = "15">Market Suspended</Item>
+        <Item value = "19">Market Open</Item>
+        <Item value = "20">Non Trading Day</Item>
+        <Item value = "100">Error</Item>
+        <Item value = "101">Internal Extension</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_CAPACITY" group = "" defaultVal = "">
+        <Item value = "0">ALL CAPACITIES</Item>
+        <Item value = "1">MTCH</Item>
+        <Item value = "2">DEAL</Item>
+        <Item value = "3">AOTC</Item>
+        <Item value = "53">PROPRIETARY</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_CLIENT_ACCOUNT_TYPE" group = "" defaultVal = "">
+        <Item value = "0">Institutional</Item>
+        <Item value = "1">Individual</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_CLOSING_PRICE_INDICATOR" group = "" defaultVal = "">
+        <Item value = "0">Price Unavailable</Item>
+        <Item value = "1">Closing Auction</Item>
+        <Item value = "2">Last Regular Trade</Item>
+        <Item value = "3">Mid Point</Item>
+        <Item value = "4">Last Uncrossing Trade</Item>
+        <Item value = "5">Previous Close</Item>
+        <Item value = "6">VWAP (Fixed Period/Variable Period)</Item>
+        <Item value = "8">Reference Price</Item>
+        <Item value = "9">VWAP of last &apos;n&apos; trades</Item>
+        <Item value = "10">Best Bid</Item>
+        <Item value = "11">CPI_BEST_OFFER</Item>
+        <Item value = "12">Theoretical Price</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_CONTAINER" group = "" defaultVal = "">
+        <Item value = "0">None</Item>
+        <Item value = "1">Order Book</Item>
+        <Item value = "2">Odd Lot</Item>
+        <Item value = "3">Market Order Book</Item>
+        <Item value = "5">Order Queue</Item>
+        <Item value = "6">Stop Order Queue</Item>
+        <Item value = "7">Pegged Order Queue</Item>
+        <Item value = "8">Cross Queue</Item>
+        <Item value = "10">Firm Quote Book</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_CRITICALITY" group = "" defaultVal = "">
+        <Item value = "1">Level 1</Item>
+        <Item value = "2">Level 2</Item>
+        <Item value = "3">Level 3</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_CROSS_TYPE" group = "" defaultVal = "">
+        <Item value = "5">Internal Cross</Item>
+        <Item value = "6">Internal BTF</Item>
+        <Item value = "7">Committed Cross</Item>
+        <Item value = "8">Committed BTF</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_DELAY_MODE" group = "" defaultVal = "">
+        <Item value = "0">TIME_BASED</Item>
+        <Item value = "1">SOD_BASED</Item>
+        <Item value = "2">EOD_BASED</Item>
+        <Item value = "3">NOON</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_ENABLE_DISABLE" group = "" defaultVal = "">
+        <Item value = "0">Disabled</Item>
+        <Item value = "1">Enabled</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_ENTITY_DEP_TYPE" group = "" defaultVal = "">
+        <Item value = "0">Non Restricted</Item>
+        <Item value = "1">Restricted</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_ENTITY_STATUS" group = "" defaultVal = "">
+        <Item value = "0">Active</Item>
+        <Item value = "1">Inactive</Item>
+        <Item value = "2">Disabled</Item>
+        <Item value = "3">Expired</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_EVENT_STATUS" group = "" defaultVal = "">
+        <Item value = "-1">ES_undef</Item>
+        <Item value = "0">ES_Session Start</Item>
+        <Item value = "1">ES_Session End</Item>
+        <Item value = "2">ES_Session change Fail</Item>
+        <Item value = "3">ES_Session Extend</Item>
+        <Item value = "4">ES_Market Close</Item>
+        <Item value = "5">ES_Market Suspended</Item>
+        <Item value = "6">ES_Market Open</Item>
+        <Item value = "7">ES_New</Item>
+        <Item value = "8">ES_PFill</Item>
+        <Item value = "9">ES_Reject</Item>
+        <Item value = "10">ES_Expired</Item>
+        <Item value = "11">ES_Fill</Item>
+        <Item value = "12">ES_Cancel</Item>
+        <Item value = "13">ES_Amend</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_EXEC_TYPE" group = "" defaultVal = "">
+        <Item value = "0">New</Item>
+        <Item value = "4">Cancelled</Item>
+        <Item value = "5">Amended</Item>
+        <Item value = "8">Rejected</Item>
+        <Item value = "9">Suspended</Item>
+        <Item value = "12">Expired</Item>
+        <Item value = "13">Restated</Item>
+        <Item value = "15">Fill</Item>
+        <Item value = "16">Trade Correct</Item>
+        <Item value = "17">Trade Cancel</Item>
+        <Item value = "21">Triggered</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_EXERCISE_STYLE" group = "" defaultVal = "">
+        <Item value = "0">European</Item>
+        <Item value = "1">American</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_FE_WINDOWS" group = "" defaultVal = "">
+        <Item value = "0">Login Window</Item>
+        <Item value = "3">Profile</Item>
+        <Item value = "14">Analytic Window</Item>
+        <Item value = "15">Annotation Window</Item>
+        <Item value = "16">Reasoning Out Timeline</Item>
+        <Item value = "19">Client View</Item>
+        <Item value = "20">News Window</Item>
+        <Item value = "21">Sessions</Item>
+        <Item value = "22">Schedules</Item>
+        <Item value = "23">Field Set</Item>
+        <Item value = "24">Record</Item>
+        <Item value = "25">Report</Item>
+        <Item value = "26">Scheduler Window</Item>
+        <Item value = "27">Report Request Window</Item>
+        <Item value = "28">Advanced Filter Window</Item>
+        <Item value = "29">Change Sort Order Window</Item>
+        <Item value = "10000">Main Window</Item>
+        <Item value = "20000">Orders Window</Item>
+        <Item value = "20001">Trades Window</Item>
+        <Item value = "20002">Instrument View</Item>
+        <Item value = "20003">Order Book Window</Item>
+        <Item value = "20004">Instrument Selector</Item>
+        <Item value = "20005">Alert Manager</Item>
+        <Item value = "20006">Spread Graph</Item>
+        <Item value = "20007">Mining Manager</Item>
+        <Item value = "20008">Market Replay</Item>
+        <Item value = "20009">Preferences</Item>
+        <Item value = "20011">RFQ</Item>
+        <Item value = "20012">Watch History</Item>
+        <Item value = "20013">Firm Selector</Item>
+        <Item value = "20014">Firm View</Item>
+        <Item value = "20015">Trader Selector</Item>
+        <Item value = "20016">Order History Window</Item>
+        <Item value = "20017">Firm History</Item>
+        <Item value = "20018">Trade History Window</Item>
+        <Item value = "20019">Market Watch History</Item>
+        <Item value = "20020">Detail Window</Item>
+        <Item value = "20021">Alert History</Item>
+        <Item value = "20022">Alert Attributes</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_FRONT_END" group = "" defaultVal = "">
+        <Item value = "1">Investigation Manager</Item>
+        <Item value = "2">Pentagon</Item>
+        <Item value = "3">Market Replay</Item>
+        <Item value = "4">Reporting Workstation</Item>
+        <Item value = "5">Configuration Manager</Item>
+        <Item value = "6">YAAN</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_GFA_POLICY" group = "" defaultVal = "">
+        <Item value = "1">Multiple Auctions</Item>
+        <Item value = "2">Single Auction</Item>
+        <Item value = "3">None</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_GFS_POLICY" group = "" defaultVal = "">
+        <Item value = "4">Multiple Auctions</Item>
+        <Item value = "5">Single Auction</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_GROUP_TYPE" group = "" defaultVal = "">
+        <Item value = "1">MARKET</Item>
+        <Item value = "2">SECTOR</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_INSTRUMENT_QUOTE_TYPE" group = "" defaultVal = "">
+        <Item value = "0">ELECTRONIC QUOTES</Item>
+        <Item value = "1">FIRM QUOTES</Item>
+        <Item value = "4">LSEG_BOTH_TYPES</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_INSTRUMENT_STATUS" group = "" defaultVal = "">
+        <Item value = "0">Active</Item>
+        <Item value = "1">Suspended</Item>
+        <Item value = "2">Inactive</Item>
+        <Item value = "3">Halt</Item>
+        <Item value = "4">Expired</Item>
+        <Item value = "5">Quote suspended</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_INTERNAL_INSTRUMENT_TYPE" group = "" defaultVal = "">
+        <Item value = "1">Bill</Item>
+        <Item value = "2">Bond</Item>
+        <Item value = "3">Future</Item>
+        <Item value = "4">Option</Item>
+        <Item value = "5">Swap</Item>
+        <Item value = "6">Pack</Item>
+        <Item value = "7">Bundle</Item>
+        <Item value = "8">Repo</Item>
+        <Item value = "9">Lock Swap</Item>
+        <Item value = "10">Yield Diff</Item>
+        <Item value = "11">Pick Give</Item>
+        <Item value = "12">TIPS</Item>
+        <Item value = "13">US Basis</Item>
+        <Item value = "14">EU Basis</Item>
+        <Item value = "15">Repo Swap</Item>
+        <Item value = "16">TBA Roll</Item>
+        <Item value = "17">Special Repo</Item>
+        <Item value = "18">Cal Spread</Item>
+        <Item value = "19">Eurodollar Future</Item>
+        <Item value = "20">Covered Call</Item>
+        <Item value = "21">Covered Put</Item>
+        <Item value = "22">Multi-leg Options</Item>
+        <Item value = "23">MTG Butterfly</Item>
+        <Item value = "24">ETF</Item>
+        <Item value = "25">Equity</Item>
+        <Item value = "26">Butterfly</Item>
+        <Item value = "27">Calendar Spread</Item>
+        <Item value = "28">Call Calendar Spread</Item>
+        <Item value = "29">Call Spread</Item>
+        <Item value = "30">Condor</Item>
+        <Item value = "31">Put Calendar Spread</Item>
+        <Item value = "32">Put Spread</Item>
+        <Item value = "33">Straddle</Item>
+        <Item value = "34">Strangle</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_INTERNAL_INSTUMENT_SUB_TYPE" group = "" defaultVal = "">
+        <Item value = "1">Outright</Item>
+        <Item value = "2">Spread</Item>
+        <Item value = "3">Call</Item>
+        <Item value = "4">Put</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_IS_AGGRESSOR" group = "" defaultVal = "">
+        <Item value = "0">NOT_AGGRESSOR</Item>
+        <Item value = "1">AGGRESSOR</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_LAST_TRADE_TYPE" group = "" defaultVal = "">
+        <Item value = "0">Neutral Tick</Item>
+        <Item value = "1">Plus Tick</Item>
+        <Item value = "2">Zero Plus Tick</Item>
+        <Item value = "3">Minus Tick</Item>
+        <Item value = "4">Zero Minus Tick</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_LIQUIDITY" group = "" defaultVal = "">
+        <Item value = "0">Illiquid</Item>
+        <Item value = "1">Liquid</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_LOAD_ID" group = "" defaultVal = "">
+        <Item value = "1">P1</Item>
+        <Item value = "2">P2</Item>
+        <Item value = "3">P3</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_MANUAL_ENTRY" group = "" defaultVal = "">
+        <Item value = "0">REGULATORY</Item>
+        <Item value = "1">RUMOURS</Item>
+        <Item value = "2">NEWS</Item>
+        <Item value = "4">CORPORATE_ACTIONS</Item>
+        <Item value = "5">ANNOUNCEMENTS</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_MANUAL_ENTRY_STATUS" group = "" defaultVal = "">
+        <Item value = "1">SENT</Item>
+        <Item value = "2">PENDING</Item>
+        <Item value = "3">REMOVED</Item>
+        <Item value = "4">UNAPPROVED</Item>
+        <Item value = "5">REJECTED</Item>
+        <Item value = "11">LOGGED_ENTRY</Item>
+        <Item value = "12">EXPLAINED_ENTRY</Item>
+        <Item value = "13">REJECTED_ENTRY</Item>
+        <Item value = "14">VERIFIED_ENTRY</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_MARKET_MAKER_STATUS" group = "" defaultVal = "">
+        <Item value = "0">INACTIVE</Item>
+        <Item value = "1">ACTIVE</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_MARKET_STATUS" group = "" defaultVal = "">
+        <Item value = "0">Closed</Item>
+        <Item value = "1">Open</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_MATCH_STATUS" group = "" defaultVal = "">
+        <Item value = "0">Matched</Item>
+        <Item value = "1">Unmatched</Item>
+        <Item value = "2">Advisory Error</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_MATCH_TYPE" group = "" defaultVal = "">
+        <Item value = "2">OFF_BOOK_2_PARTY_TRADE_REPORT</Item>
+        <Item value = "4">REGULAR_TRADE</Item>
+        <Item value = "7">AUCTION_TRADE</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_MD_FOR_RFQ" group = "" defaultVal = "">
+        <Item value = "0">On update</Item>
+        <Item value = "1">On execution</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_NA" group = "" defaultVal = "" />
+    <Enum name = "SYS_MGR_NEWS_TYPE" group = "" defaultVal = "">
+        <Item value = "0">MARKET_NEWS</Item>
+        <Item value = "1">INSTRUMENT_NEWS</Item>
+        <Item value = "2">GENERAL</Item>
+        <Item value = "3">NONE</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_NEW_STRIKE_AVAILABILITY" group = "" defaultVal = "">
+        <Item value = "0">INTER_DAY</Item>
+        <Item value = "1">INTRA_DAY</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_NOVATED_INDICATOR" group = "" defaultVal = "">
+        <Item value = "0">NI_SET_INTERNALIZED</Item>
+        <Item value = "1">NI_NORMAL</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_OPENING_PRICE_INDICATOR" group = "" defaultVal = "">
+        <Item value = "0">Unavailable</Item>
+        <Item value = "1">Auction Trade</Item>
+        <Item value = "2">Regular Trade</Item>
+        <Item value = "3">Mid Point</Item>
+        <Item value = "4">Manual</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_OPTION_TYPE" group = "" defaultVal = "">
+        <Item value = "3">Call</Item>
+        <Item value = "4">Put</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_ORDER_BOOK_EVENT_ID" group = "" defaultVal = "">
+        <Item value = "0">Session</Item>
+        <Item value = "1">Market Order Extension</Item>
+        <Item value = "100">Price Monitoring Extension</Item>
+        <Item value = "101">Manual</Item>
+        <Item value = "102">Suspended</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_ORDER_STATUS" group = "" defaultVal = "">
+        <Item value = "0">New</Item>
+        <Item value = "1">Partial Fill</Item>
+        <Item value = "2">Fill</Item>
+        <Item value = "4">Cancelled</Item>
+        <Item value = "6">Expired</Item>
+        <Item value = "8">Rejected</Item>
+        <Item value = "9">Suspended</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_ORDER_SUB_TYPE" group = "" defaultVal = "">
+        <Item value = "0">Order</Item>
+        <Item value = "1">Indicative Quote</Item>
+        <Item value = "3">Quote</Item>
+        <Item value = "5">Pegged Order</Item>
+        <Item value = "6">Limit Pegged Order</Item>
+        <Item value = "7">Cross Order</Item>
+        <Item value = "8">Neg Deal Off</Item>
+        <Item value = "13">Streaming Quote</Item>
+        <Item value = "14">Implied In</Item>
+        <Item value = "15">Implied Out</Item>
+        <Item value = "16">Implied Match</Item>
+        <Item value = "17">Implied Across</Item>
+        <Item value = "50">Firm Quote</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_ORDER_TYPE" group = "" defaultVal = "">
+        <Item value = "1">Market</Item>
+        <Item value = "2">Limit</Item>
+        <Item value = "3">Stop</Item>
+        <Item value = "4">Stop Limit</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_PLT_DUAL_ENTRY_ACTION" group = "" defaultVal = "">
+        <Item value = "0">Add</Item>
+        <Item value = "1">Amend</Item>
+        <Item value = "2">Delete</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_PLT_DUAL_ENTRY_ENTITIES" group = "" defaultVal = "" />
+    <Enum name = "SYS_MGR_PLT_DUAL_ENTRY_EXECUTION_TYPE" group = "" defaultVal = "">
+        <Item value = "0">Immediate</Item>
+        <Item value = "1">Pending Change</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_PLT_DUAL_ENTRY_PC_EVENT_TYPE" group = "" defaultVal = "">
+        <Item value = "0">_</Item>
+        <Item value = "1">SOD</Item>
+        <Item value = "2">EOD</Item>
+        <Item value = "5">Time</Item>
+        <Item value = "6">External</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_PLT_DUAL_ENTRY_REQUEST_TYPE" group = "" defaultVal = "">
+        <Item value = "0">Dual Entry Request</Item>
+        <Item value = "1">Rekey</Item>
+        <Item value = "2">Reassign</Item>
+        <Item value = "3">Cancel</Item>
+        <Item value = "4">Dual Auth</Item>
+        <Item value = "5">DualPendingApproval</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_PLT_DUAL_ENTRY_RESPONSIBILITY" group = "" defaultVal = "">
+        <Item value = "0">Maker</Item>
+        <Item value = "1">Checker</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_PLT_DUAL_ENTRY_STATUS" group = "" defaultVal = "">
+        <Item value = "1">Pending Dual Entry</Item>
+        <Item value = "2">Mismatched</Item>
+        <Item value = "3">Reassigned</Item>
+        <Item value = "4">Successful</Item>
+        <Item value = "5">Cancelled</Item>
+        <Item value = "6">Pending Approval</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_PRICE_DIFFERENTIAL" group = "" defaultVal = "">
+        <Item value = "0">None</Item>
+        <Item value = "1">First</Item>
+        <Item value = "2">Second</Item>
+        <Item value = "3">Third</Item>
+        <Item value = "4">Fourth</Item>
+        <Item value = "5">Fifth</Item>
+        <Item value = "6">Sixth</Item>
+        <Item value = "7">Seventh</Item>
+        <Item value = "8">Eighth</Item>
+        <Item value = "9">Ninth</Item>
+        <Item value = "65">Aggressive</Item>
+        <Item value = "66">New</Item>
+        <Item value = "67">SEP Aggression</Item>
+        <Item value = "80">Passive</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_PRICE_NOTATION" group = "" defaultVal = "">
+        <Item value = "0">Monetary Value</Item>
+        <Item value = "1">Percentage</Item>
+        <Item value = "2">Yield</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_PRODUCT_TYPE" group = "" defaultVal = "">
+        <Item value = "2">Derivative</Item>
+        <Item value = "25">Equity</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_PT_TRANSPARENCY" group = "" defaultVal = "">
+        <Item value = "0">NPT</Item>
+        <Item value = "1">FPT</Item>
+        <Item value = "2">PPT</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_PUBLISH_INDICATOR" group = "" defaultVal = "">
+        <Item value = "0">PI_DO_NOT_PUBLISH</Item>
+        <Item value = "1">PI_IMMEDIATE</Item>
+        <Item value = "2">PI_DELAYED</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_QUOTE_TYPE" group = "" defaultVal = "">
+        <Item value = "0">Invalid</Item>
+        <Item value = "1">Buy Only</Item>
+        <Item value = "2">Sell Only</Item>
+        <Item value = "3">Dual Sided</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_RFQ_CATEGORY" group = "" defaultVal = "">
+        <Item value = "1">RFQ Message</Item>
+        <Item value = "2">RFQ Response</Item>
+        <Item value = "3">RFQ Exec Report</Item>
+        <Item value = "4">Quote Response</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_RFQ_SIDE" group = "" defaultVal = "" />
+    <Enum name = "SYS_MGR_RFQ_STATUS" group = "" defaultVal = "">
+        <Item value = "1">Open</Item>
+        <Item value = "2">Rejected</Item>
+        <Item value = "3">Matched</Item>
+        <Item value = "4">Expired</Item>
+        <Item value = "5">Terminate</Item>
+        <Item value = "6">Cancelled</Item>
+        <Item value = "7">New</Item>
+        <Item value = "8">Partially Filled</Item>
+        <Item value = "9">Filled</Item>
+        <Item value = "10">MM Accepted</Item>
+        <Item value = "11">MM Updated</Item>
+        <Item value = "12">RFQ reject rejected</Item>
+        <Item value = "13">RFQ reject accepted</Item>
+        <Item value = "14">None</Item>
+        <Item value = "15">Accepted</Item>
+        <Item value = "16">Acceptance Rejected</Item>
+        <Item value = "17">Cancel Accepted</Item>
+        <Item value = "18">Cancel Rejected</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_RFQ_TYPE" group = "" defaultVal = "">
+        <Item value = "0">None</Item>
+        <Item value = "1">Public</Item>
+        <Item value = "2">Private</Item>
+        <Item value = "3">Public &amp; Pvt</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_RISK_LEVEL" group = "" defaultVal = "">
+        <Item value = "0">NO_RISK</Item>
+        <Item value = "1">RISKY</Item>
+        <Item value = "2">SUSPENDED</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_ROLE_TYPE" group = "" defaultVal = "">
+        <Item value = "0">None</Item>
+        <Item value = "1">Algo</Item>
+        <Item value = "2">LEI/Firm</Item>
+        <Item value = "3">Natural Person</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_SESSION_TYPE" group = "" defaultVal = "">
+        <Item value = "0">Default</Item>
+        <Item value = "1">Market Open</Item>
+        <Item value = "2">Pre-Trading</Item>
+        <Item value = "3">Start of Trading</Item>
+        <Item value = "4">Grace Period</Item>
+        <Item value = "5">Opening Auction Call</Item>
+        <Item value = "6">Re-Opening Auction Call</Item>
+        <Item value = "7">Regular Trading</Item>
+        <Item value = "8">Pre-Mandatory</Item>
+        <Item value = "9">Mandatory</Item>
+        <Item value = "10">Post-Mandatory</Item>
+        <Item value = "11">Pre-Trade Reporting</Item>
+        <Item value = "12">Trade Reporting</Item>
+        <Item value = "13">Volatility Auction Call</Item>
+        <Item value = "14">Pre-Closing Auction Call</Item>
+        <Item value = "15">Closing Auction Call</Item>
+        <Item value = "16">Closing Price Publication</Item>
+        <Item value = "17">Closing Price Cross</Item>
+        <Item value = "18">Periodic Auction Call</Item>
+        <Item value = "19">Post Close</Item>
+        <Item value = "20">Halt</Item>
+        <Item value = "21">Pause</Item>
+        <Item value = "22">Resume Auction Call</Item>
+        <Item value = "23">Halt and Close</Item>
+        <Item value = "24">Market Close</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_SIDE" group = "" defaultVal = "">
+        <Item value = "1">Buy</Item>
+        <Item value = "2">Sell</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_SIZE_FORMULAE" group = "" defaultVal = "">
+        <Item value = "1">SYNTHETIC_SIZE</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_SOURCE_OF_NEWS" group = "" defaultVal = "">
+        <Item value = "0">Operations Manager</Item>
+        <Item value = "1">Service Desk</Item>
+        <Item value = "2">External News Feed</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_SSP_CREATION_CRITERIA" group = "" defaultVal = "">
+        <Item value = "0">Consecutive</Item>
+        <Item value = "1">Anchored to First Expiry</Item>
+        <Item value = "2">All Combinations</Item>
+        <Item value = "3">Same Expiration Period</Item>
+        <Item value = "4">Straddle</Item>
+        <Item value = "5">Strangle</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_Status" group = "" defaultVal = "">
+        <Item value = "0">Active</Item>
+        <Item value = "1">Suspended</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_TIF" group = "" defaultVal = "">
+        <Item value = "0">DAY</Item>
+        <Item value = "1">GTC</Item>
+        <Item value = "3">IOC</Item>
+        <Item value = "4">FOK</Item>
+        <Item value = "5">OPEN</Item>
+        <Item value = "6">GTD</Item>
+        <Item value = "8">GTT</Item>
+        <Item value = "10">ATC</Item>
+        <Item value = "12">CPX</Item>
+        <Item value = "50">GFA</Item>
+        <Item value = "51">GFX</Item>
+        <Item value = "52">GFS</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_TIF_POLICY" group = "" defaultVal = "">
+        <Item value = "0">Policy Not Set</Item>
+        <Item value = "1">GFA Multiple Auctions</Item>
+        <Item value = "2">GFA Single Auction</Item>
+        <Item value = "3">GFA None</Item>
+        <Item value = "4">GFS Multiple Auctions</Item>
+        <Item value = "5">GFS Single Auction</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_TRADER_STATUS" group = "" defaultVal = "">
+        <Item value = "0">Active</Item>
+        <Item value = "1">Suspended</Item>
+        <Item value = "3">Inactive</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_TRADE_REPORTING_MODEL" group = "" defaultVal = "">
+        <Item value = "1">All</Item>
+        <Item value = "2">Single Sided Only</Item>
+        <Item value = "3">Dual sided (alleged) only</Item>
+        <Item value = "5">None</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_TRADE_STATUS" group = "" defaultVal = "">
+        <Item value = "4">New</Item>
+        <Item value = "5">Amended</Item>
+        <Item value = "6">Cancelled</Item>
+        <Item value = "20">Matched</Item>
+        <Item value = "21">Reject</Item>
+        <Item value = "22">Acknowledged</Item>
+        <Item value = "23">Matched Publication</Item>
+        <Item value = "24">Pre-Released</Item>
+        <Item value = "25">Published</Item>
+        <Item value = "26">Cancelled</Item>
+        <Item value = "27">Agreed</Item>
+        <Item value = "28">Immediate Reported</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_TRADE_SUB_TYPE" group = "" defaultVal = "">
+        <Item value = "0">LC</Item>
+        <Item value = "1">NM</Item>
+        <Item value = "2">PC</Item>
+        <Item value = "3">O</Item>
+        <Item value = "4">IF</Item>
+        <Item value = "5">NK</Item>
+        <Item value = "6">NT</Item>
+        <Item value = "7">OC</Item>
+        <Item value = "8">OK</Item>
+        <Item value = "9">OT</Item>
+        <Item value = "10">SC</Item>
+        <Item value = "11">SI</Item>
+        <Item value = "12">SK</Item>
+        <Item value = "13">TK</Item>
+        <Item value = "26">AI</Item>
+        <Item value = "42">AT</Item>
+        <Item value = "43">UT</Item>
+        <Item value = "44">GC</Item>
+        <Item value = "45">NC</Item>
+        <Item value = "62">PT</Item>
+        <Item value = "72">CROSS</Item>
+        <Item value = "73">BTF</Item>
+        <Item value = "74">AC</Item>
+        <Item value = "101">RFQ_NT</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_TRADE_TRANSITION" group = "" defaultVal = "">
+        <Item value = "0">Not Applicable</Item>
+        <Item value = "1">New</Item>
+        <Item value = "2">Amend</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_TRADE_TYPE" group = "" defaultVal = "">
+        <Item value = "0">On Book</Item>
+        <Item value = "1">Off Book</Item>
+        <Item value = "4">RFQ Trade</Item>
+        <Item value = "5">ATF Trade</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_TRANS_TYPE" group = "" defaultVal = "">
+        <Item value = "0">TRANS_TYPE_NEW</Item>
+        <Item value = "1">TRANS_TYPE_CANCEL</Item>
+        <Item value = "2">TRANS_TYPE_REPLACE</Item>
+        <Item value = "3">TRANS_TYPE_RELEASE</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_TRUE_FALSE" group = "" defaultVal = "">
+        <Item value = "0">False</Item>
+        <Item value = "1">True</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_UNR_ID_TYPE" group = "" defaultVal = "">
+        <Item value = "0">User</Item>
+        <Item value = "1">Node</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_VENUE" group = "" defaultVal = "">
+        <Item value = "1">MIT Exchange</Item>
+        <Item value = "2">ECHO</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_WAIVER_IND" group = "" defaultVal = "">
+        <Item value = "0">NLIQ</Item>
+        <Item value = "1">OILQ</Item>
+        <Item value = "2">SIZE</Item>
+        <Item value = "3">ILQD</Item>
+        <Item value = "4">LRGS</Item>
+        <Item value = "5">RFPT</Item>
+        <Item value = "126">NONE</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_YES_NO" group = "" defaultVal = "">
+        <Item value = "0">No</Item>
+        <Item value = "1">Yes</Item>
+    </Enum>
+    <Enum name = "SYS_MGR_YES_NO_FLAG" group = "" defaultVal = "">
+        <Item value = "0">No</Item>
+        <Item value = "1">Yes</Item>
+    </Enum>
+    <Enum name = "Status" group = "" defaultVal = "">
+        <Item value = "0">Active</Item>
+        <Item value = "1">Suspended</Item>
+        <Item value = "46">Modify Pattern Status Window</Item>
+    </Enum>
+    <Enum name = "TIF" group = "" defaultVal = "">
+        <Item value = "0">DAY</Item>
+        <Item value = "1">GTC</Item>
+        <Item value = "3">IOC</Item>
+        <Item value = "4">FOK</Item>
+        <Item value = "5">OPEN</Item>
+        <Item value = "6">GTD</Item>
+        <Item value = "8">GTT</Item>
+        <Item value = "10">ATC</Item>
+        <Item value = "12">CPX</Item>
+        <Item value = "50">GFA</Item>
+        <Item value = "51">GFX</Item>
+        <Item value = "52">GFS</Item>
+    </Enum>
+    <Enum name = "TRADE_SUB_TYPE" group = "" defaultVal = "">
+        <Item value = "0">LC</Item>
+        <Item value = "1">NM</Item>
+        <Item value = "2">PC</Item>
+        <Item value = "3">O</Item>
+        <Item value = "4">IF</Item>
+        <Item value = "5">NK</Item>
+        <Item value = "6">NT</Item>
+        <Item value = "7">OC</Item>
+        <Item value = "8">OK</Item>
+        <Item value = "9">OT</Item>
+        <Item value = "10">SC</Item>
+        <Item value = "11">SI</Item>
+        <Item value = "12">SK</Item>
+        <Item value = "13">TK</Item>
+        <Item value = "14">AS</Item>
+        <Item value = "15">BT</Item>
+        <Item value = "16">CF</Item>
+        <Item value = "17">LT</Item>
+        <Item value = "18">NX</Item>
+        <Item value = "19">OD</Item>
+        <Item value = "20">OX</Item>
+        <Item value = "21">TX</Item>
+        <Item value = "22">PF</Item>
+        <Item value = "23">SS</Item>
+        <Item value = "24">WX</Item>
+        <Item value = "25">GU</Item>
+        <Item value = "26">AI</Item>
+        <Item value = "27">BK</Item>
+        <Item value = "28">DE</Item>
+        <Item value = "29">DH</Item>
+        <Item value = "30">DL</Item>
+        <Item value = "31">DN</Item>
+        <Item value = "32">DR</Item>
+        <Item value = "33">DT</Item>
+        <Item value = "34">DU</Item>
+        <Item value = "35">OE</Item>
+        <Item value = "36">OH</Item>
+        <Item value = "37">OL</Item>
+        <Item value = "38">ON</Item>
+        <Item value = "39">OR</Item>
+        <Item value = "40">OU</Item>
+        <Item value = "41">OP</Item>
+        <Item value = "42">AT</Item>
+        <Item value = "43">UT</Item>
+        <Item value = "44">GC</Item>
+        <Item value = "45">NC</Item>
+    </Enum>
+    <Enum name = "TRADE_TYPE" group = "" defaultVal = "">
+        <Item value = "0">On Book</Item>
+        <Item value = "1">Off Book</Item>
+        <Item value = "2">On Market</Item>
+        <Item value = "3">Off Market </Item>
+    </Enum>
+    <Enum name = "TRANS_TYPE" group = "" defaultVal = "">
+        <Item value = "0">TRANS_TYPE_NEW</Item>
+        <Item value = "1">TRANS_TYPE_CANCEL</Item>
+        <Item value = "2">TRANS_TYPE_REPLACE</Item>
+        <Item value = "3">TRANS_TYPE_RELEASE</Item>
+    </Enum>
+    <Enum name = "TRUE_FALSE" group = "" defaultVal = "">
+        <Item value = "0">False</Item>
+        <Item value = "1">True</Item>
+    </Enum>
+    <Enum name = "YES_NO" group = "" defaultVal = "">
+        <Item value = "0">No</Item>
+        <Item value = "1">Yes</Item>
+    </Enum>
+    <Enum name = "YES_NO_FLAG" group = "" defaultVal = "">
+        <Item value = "0">No</Item>
+        <Item value = "1">Yes</Item>
+    </Enum>
+ </Enums>

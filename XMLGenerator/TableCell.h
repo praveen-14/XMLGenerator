@@ -2,6 +2,7 @@
 #define TABLECELL_H
 
 #include <TableRow.h>
+#include <FieldInfo.h>
 
 class TableCell
 {
@@ -9,21 +10,22 @@ class TableCell
         TableCell(int row,int column);
         ~TableCell();
         void setValue(QString data);
-        void setValueSet(QList<QString> valueSet);
-//        void setNullable(bool nullable){this->nullable = nullable;}
-        QString* getValue(){
-            return &value;
-        }
-        QList<QString> getValueSet(){
-            return valueSet;
-        }
-//        bool getNullable(){return this->nullable;}
+
+        void setField(FieldInfo *field);
+
+        void setColumnIndex(int column);
+
+        void setRowIndex(int row);
+
+        QString getValue();
+        FieldInfo* getField();
+        int getRowIndex();
+        int getColumnIndex();
     private:
-        QList<QString> valueSet;
         QString value;
+        FieldInfo *field;
         int columnIndex;
         int rowIndex;
-//        bool nullable = false;
 
 };
 #endif // TABLECELL_H

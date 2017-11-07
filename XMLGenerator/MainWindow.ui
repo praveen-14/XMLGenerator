@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>XML Editor</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -23,6 +23,16 @@
          <widget class="QPushButton" name="pushButton">
           <property name="text">
            <string>Choose File</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="updateMetaDataButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Update Meta Data</string>
           </property>
          </widget>
         </item>
@@ -42,7 +52,37 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>Add Field Property</string>
+           <string>Add Attribute</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="deleteRowButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Delete Row</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="deleteColumnButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Delete Column</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="saveButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Save</string>
           </property>
          </widget>
         </item>
@@ -101,8 +141,8 @@
    <slot>loadFile()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>107</x>
-     <y>158</y>
+     <x>101</x>
+     <y>100</y>
     </hint>
     <hint type="destinationlabel">
      <x>191</x>
@@ -117,8 +157,8 @@
    <slot>addField()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>107</x>
-     <y>279</y>
+     <x>101</x>
+     <y>218</y>
     </hint>
     <hint type="destinationlabel">
      <x>941</x>
@@ -133,12 +173,76 @@
    <slot>addAttribute()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>28</x>
-     <y>395</y>
+     <x>50</x>
+     <y>277</y>
     </hint>
     <hint type="destinationlabel">
      <x>46</x>
      <y>457</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>deleteRowButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>deleteRow()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>77</x>
+     <y>336</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>66</x>
+     <y>380</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>deleteColumnButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>deleteColumn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>26</x>
+     <y>395</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>25</x>
+     <y>461</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>save()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>48</x>
+     <y>435</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>97</x>
+     <y>493</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>updateMetaDataButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>updateMetaData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>25</x>
+     <y>150</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>19</x>
+     <y>170</y>
     </hint>
    </hints>
   </connection>
@@ -147,5 +251,9 @@
   <slot>loadFile()</slot>
   <slot>addField()</slot>
   <slot>addAttribute()</slot>
+  <slot>deleteRow()</slot>
+  <slot>deleteColumn()</slot>
+  <slot>save()</slot>
+  <slot>updateMetaData()</slot>
  </slots>
 </ui>

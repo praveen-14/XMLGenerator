@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+enum fieldType
+	{
+		Text= 0, 
+		DropDown,
+		Bool,
+		Integer
+	};
+ -->
+<configs> 
+	<cache_fields>
+		<field name="type" displayName="Type" fieldType="1" isMandetory="true" default="SOCI" nullable="false">
+			<item name="SOCI  Type" value="SOCI"/>
+			<item name="gg" value="gg"/>
+		</field>
+		<field name="scope" displayName="Scope" fieldType="0" isMandetory="true" default="prototype" nullable="false"/>
+		<field name="name" displayName="Name" fieldType="0" isMandetory="true" nullable="false"/>
+		<field name="tableName" displayName="Table Name" fieldType="0" isMandetory="true" nullable="false"/>
+		<field name="defaultView" displayName="Default View" fieldType="2" isMandetory="true" default="true" nullable="false"/>
+		<field name="viewName" displayName="Full View Name" fieldType="0" isMandetory="true" nullable="false"/>
+	</cache_fields>
+	<message_fields>
+		<field name="name" displayName="Name" fieldType="0" isMandetory="true" nullable="false"/>
+		<field name="id" displayName="ID" fieldType="3" isMandetory="true" minRange="1" maxRange="1000000" nullable="false"/>
+		<field name="key" displayName="Key" fieldType="1" isMandetory="true" nullable="false"/>
+		<field name="historyKey" displayName="History Key" fieldType="1" isMandetory="true" nullable="false"/>
+		<field name="time" displayName="Time" fieldType="1" isMandetory="true" nullable="false"/>
+	</message_fields>
+	<column_fields>
+		<field name="name" displayName="Name" fieldType="0" isMandetory="true" default="" nullable="false"/>
+		<field name="displayName" displayName="Display Name" fieldType="0" isMandetory="true" nullable="false"/>
+		<field name="width" displayName="Width" fieldType="3" isMandetory="true" default="100" minRange="1" maxRange="1000000" nullable="false"/>
+		<field name="align" displayName="Align" fieldType="1" isMandetory="true" default="AlignLeft" nullable="false">
+			<item name="AlignLeft" value="1"/>
+			<item name="AlignRight" value="2"/>
+			<item name="AlignHCenter" value="4"/>
+		</field>
+		<field name="Decimals" displayName="Decimals" fieldType="3" isMandetory="true" minRange="0" maxRange="1000000" nullable="false"/>
+		<field name="showZeros" displayName="Show Zeros" fieldType="2" isMandetory="true" default="true" nullable="false"/>
+		<field name="composite" displayName="Composite" fieldType="2" isMandetory="true" default="false" nullable="false"/>
+		<field name="background" displayName="Background" fieldType="0" isMandetory="false" nullable="true"/>
+		<field name="data-type" displayName="Data Type" fieldType="1" isMandetory="true" default="Text" nullable="false">
+			<item name="Integer" value="MDT_I32"/>
+			<item name="Bigint" value="MDT_UI64"/>
+			<item name="Text" value="MDT_STRING"/>
+			<item name="Double Precision" value="MDT_F64"/>
+		</field>
+		<field name="show" displayName="Show" fieldType="2" isMandetory="true" default="true" nullable="false"/>
+		<field name="translate" displayName="Translate" fieldType="2" isMandetory="true" default="false" nullable="false"/>
+		<field name="dtRawFmt" displayName="Date Raw Format" fieldType="1" isMandetory="false" nullable="false">
+			<item name="DT_PACK_FMT_YYYYMMDD_HH_MM_SS_sss" value="0"/>
+			<item name="DT_PACK_FMT_YYYYMMDD_HH_MM_SS" value="1"/>
+			<item name="DT_PACK_FMT_YYYYMMDDHHMMSS_sss" value="2"/>
+			<item name="DT_PACK_FMT_YYYYMMDDHHMMSS" value="3"/>
+			<item name="DT_PACK_FMT_YYYYMMDD" value="4"/>
+			<item name="DT_PACK_FMT_YYYYMMDD_HH_MM_SS_uuuuuu" value="5"/>
+		</field>
+		<field name="dtDispFmt" displayName="Date Display Format" fieldType="1" isMandetory="false" nullable="false">
+			<item name="DT_DISPLAY_FMT_DATE_TIME" value="0"/>
+			<item name="DT_DISPLAY_FMT_DATE_TIME_MILLISEC" value="1"/>
+			<item name="DT_DISPLAY_FMT_DATE" value="2"/>
+			<item name="DT_DISPLAY_FMT_TIME" value="3"/>
+			<item name="DT_DISPLAY_FMT_TIME_MILLISEC" value="4"/>
+			<item name="DT_DISPLAY_FMT_DATE_TIME_MICROSEC" value="5"/>
+		</field>
+		<field name="enumName" displayName="Enum Name" fieldType="1" isMandetory="false" enumFile="F:/Projects/My Projects/build-XMLGenerator-Desktop_Qt_5_9_0_MinGW_32bit-Debug/Enums.spres" nullable="false"/>
+		<field name="sort" displayName="Sort" fieldType="1" isMandetory="false" nullable="false">
+			<item name="Ascending" value="asc"/>
+			<item name="Decending" value="dsc"/>
+		</field>
+	</column_fields>
+</configs> 

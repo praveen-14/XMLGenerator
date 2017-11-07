@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>804</width>
+    <height>572</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -17,31 +17,9 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Add Attribute</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QScrollArea" name="scrollArea">
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>580</width>
-        <height>353</height>
-       </rect>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0">
-        <layout class="QFormLayout" name="formLayout"/>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-   </item>
    <item row="1" column="0">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
@@ -52,26 +30,120 @@
      </property>
     </widget>
    </item>
+   <item row="0" column="0">
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>784</width>
+        <height>525</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2" rowstretch="1">
+       <item row="0" column="0" colspan="2">
+        <layout class="QFormLayout" name="formLayout_basic">
+         <item row="0" column="0">
+          <widget class="QLabel" name="attributeNameLabel">
+           <property name="text">
+            <string>Attribute Name - </string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="attributeNameLineEdit"/>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="attributeDisplayNameLabel">
+           <property name="text">
+            <string>Attribute Display Name</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="attributeDisplayNameLineEdit"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="valueTypeLabel">
+           <property name="text">
+            <string>Value Type</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QComboBox" name="valueTypeComboBox">
+           <property name="currentText">
+            <string>Text</string>
+           </property>
+           <property name="currentIndex">
+            <number>0</number>
+           </property>
+           <item>
+            <property name="text">
+             <string>Text</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Integer</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Drop Down</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Boolean</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="mandatoryAttributeLabel">
+           <property name="text">
+            <string>Mandatory Attribute</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QCheckBox" name="mandatoryAttributeCheckBox"/>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="canBeEmptyLabel">
+           <property name="text">
+            <string>Can be Empty</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QCheckBox" name="canBeEmptyCheckBox"/>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="enumFieldLabel">
+           <property name="text">
+            <string>Enum Field</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QCheckBox" name="enumFieldCheckBox"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>
  <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>AddAttributeWindow</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>266</x>
-     <y>390</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
@@ -79,8 +151,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>334</x>
-     <y>390</y>
+     <x>343</x>
+     <y>562</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
@@ -90,13 +162,13 @@
   </connection>
   <connection>
    <sender>buttonBox</sender>
-   <signal>clicked(QAbstractButton*)</signal>
+   <signal>accepted()</signal>
    <receiver>AddAttributeWindow</receiver>
    <slot>saveData()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>442</x>
-     <y>381</y>
+     <x>451</x>
+     <y>562</y>
     </hint>
     <hint type="destinationlabel">
      <x>460</x>
@@ -107,5 +179,6 @@
  </connections>
  <slots>
   <slot>saveData()</slot>
+  <slot>addValue()</slot>
  </slots>
 </ui>

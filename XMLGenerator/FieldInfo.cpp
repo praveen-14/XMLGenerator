@@ -49,6 +49,16 @@ void FieldInfo::setIsMandetory(bool isMandetory)
 	m_isMandetory = isMandetory;
 }
 
+bool FieldInfo::nullable() const
+{
+    return m_nullable;
+}
+
+void FieldInfo::setNullable(bool nullable)
+{
+    m_nullable = nullable;
+}
+
 QString FieldInfo::defaultVal() const
 {
 	return m_defaultVal;

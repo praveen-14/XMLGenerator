@@ -28,44 +28,35 @@ public:
     ~MainWindow();
 
     static MainWindow* mainWindow;
-    static void createMainWindow();
 
     void addTableController(XMLFileData *xmlData);
 
     Table* getTableModel(QTableWidget *tableWidget);
-    FileController* getFileController(){return &fileController;}
-    QMap<QString, TableController*>* getTableControllerMap(){ return &tableControllerMap;}
+    FileController* getFileController();
+    QMap<QString, TableController*>* getTableControllerMap();
     TableController* getTableController(QString key);
-    Ui::MainWindow* getMainUI(){return ui;}
-
-
-//    void clearAllProperties(){this->allProperties.clear();}
-//    void addToProperties(QString property){this->allProperties.push_back(property);}
-//    QList<QString> getAllProperties(){return this->allProperties;}
-
-//    void clearXMLData(){this->XMLData.clear();}
-//    void addToXMLData(QString key, QString value)
-//    {
-//        if(this->XMLData.contains(key) == false){
-//            QList<QString> attributeData;
-//            this->XMLData.insert(key,attributeData);
-//        }
-//        this->XMLData[key] << value;
-
-//    }
-//    QMap<QString, QList<QString>> getXMLData(){return this->XMLData;}
+    QIcon* getWarningIcon();
 
 public slots:
     void loadFile();
     void addField();
     void addAttribute();
-    void syncTableChanges();
+    void setSelectedRow(int row);
+    void setSelectedColumn(int column);
+    void deleteRow();
+    void deleteColumn();
+    void tabChanged();
+    void save();
+    void updateMetaData();
+    void closeTab(int index);
 
 private:
     Ui::MainWindow *ui;
     FileController fileController;
     QMap<QString, TableController*> tableControllerMap;
-    CacheConfig *cacheConfig = CacheConfig::getInstance();
+    QIcon warningIcon;
+    int selectedRow;
+    int selectedColumn;
 
 //    QList<QString> allProperties;
 //    QMap<QString, QList<QString>> XMLData = QMap<QString, QList<QString>>();

@@ -12,33 +12,52 @@
 #include <QTextCodec>
 #include <QCoreApplication>
 #include <QComboBox>
+#include <QCheckBox>
+#include <QSpinBox>
+#include <QLineEdit>
+#include <QSignalMapper>
+#include <QMessageBox>
 
-class TableController
+class TableController : public QObject
 {
+    Q_OBJECT
+
     public:
-        TableController();
+        explicit TableController(QWidget *tableWidgetParent = 0);
         ~TableController();
 
-        Table* getDataTable(){return &dataTable;}
-        QTableWidget* getTableView(){return &tableView;}
-//        int getTabIndex(){return tabIndex;}
-//        QString getFilePath(){return filePath;}
+        Table* getDataTable();
+        QTableWidget* getTableView();
+        void populateTableModel(XMLFileData *data);
+        void createTableView();
+        void addAttributeToTableView(FieldInfo *newField);
+        QString addAttributeToModel(FieldInfo *newField);
+        QString addFieldToModel(QMap<QString,QString> *fieldData);
+        void addFieldToTableView(int row);
+        void addCellToTableView(int row, int column, QString value, FieldInfo *field, QTableWidget *tableWidget);
+        QString updateMetaData(QList<QList<QList<QString>>> *updatedMetaData);
+//        QString getColorCode(QString value, FieldInfo *field);
+        QList<QList<QString>>* getMetaCacheData();
+        QList<QList<QString>>* getMetaMessageData();
+        QList<QList<QString>>* getDefaultSortList();
 
-//        void setTabIndex(int index){ this->tabIndex = index;}
-//        void setFilePath(QString filePath){ this->filePath = filePath;}
+        void setMetaCacheData(QList<QList<QString>>* metaCacheData);
+        void setMetaMessageData(QList<QList<QString>>* metaMessageData);
+        void setDefaultSortList(QList<QList<QString>>* defaultSortList);
 
-//        void createTable(QList<QList<QString>,QList<QString>,QList<QList<QString>>> XMLData);
-        void populateTableModel(XMLFileData *data,QList<FieldInfo*> *columnFieldInfo);
-        QTableWidget* createTableView(QString fileName);
-        void addAttributeToTableView(QString attributeName, QList<QString> valueSpace);
-        QMap<QString,QList<QString>>* addAttributeToModel(QMap<QString,QString> *attributeData);
-        QMap<QString,QString>* addFieldToModel(QMap<QString,QString> *fieldData,QMap<int, QList<QString>> *fieldValues);
-        void addFieldToTableView(QString *fieldName, QMap<QString,QString> *fieldData, QMap<int,QList<QString>> *fieldValues);
+
+        void deleteRow(int row);
+        void deleteColumn(int column);
 
     public slots:
+        void updateTableModel(QWidget *sender);
+
     private:
         Table dataTable;
-        QTableWidget tableView;
+        QTableWidget *tableView;
+        QList<QList<QString>> metaCacheData;
+        QList<QList<QString>> metaMessageData;
+        QList<QList<QString>> defaultSortList;
 //        int tabIndex;
 };
 #endif // TABLECONTROLLER_H

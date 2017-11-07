@@ -1,10 +1,10 @@
 #include "AddFieldWindow.h"
 #include "ui_AddFieldWindow.h"
 
-AddFieldWindow::AddFieldWindow(QWidget *parent,QList<QString> *attributesList,CacheConfig *config) : QDialog(parent, Qt::Window ), ui(new Ui::AddFieldWindow) {
+AddFieldWindow::AddFieldWindow(QWidget *parent, QTableWidget *tableWidget) :
+    QDialog(parent, Qt::Window ), ui(new Ui::AddFieldWindow) {
     ui->setupUi(this);
-    this->attributesList = *attributesList;
-    this->config = *config;
+    this->tableWidget = tableWidget;
     this->populateAttributes();
 }
 AddFieldWindow::~AddFieldWindow() {
@@ -16,52 +16,145 @@ QMap<QString,QString>* AddFieldWindow::getWindowData(){
 }
 
 void AddFieldWindow::populateAttributes(){
-    int noOfAttributes = this->attributesList.count();
-    for(int i = 0; i<noOfAttributes; i++){
-        QString attributeName = attributesList.at(i);
-        int configColumnPos = this->config.posForColumnName(attributeName);
-        FieldInfo attributeInfo = config.columnFieldList()->at(configColumnPos);
-        if(attributeInfo.fieldType() == FieldType::DropDown){
-            QComboBox *comboBox = new QComboBox();
-            comboBox->setProperty("variableName",attributeName);
-            QList<QString> valueSpace = attributeInfo.dropDownValMap()->keys();
-            for(int j=0; j< valueSpace->count(); j++){
-                comboBox->addItem(valueSpace.at(j));
+    TableController *tableController = (TableController*)this->tableWidget->property("tableController").value<void*>();
+    Table *table = tableController->getDataTable();
+    QList<FieldInfo*> columnFields;
+    foreach(QString attributeName, *(table->getAllAttributes()))
+    {
+        foreach(FieldInfo * item, *(CacheConfig::getInstance()->columnFieldList()))
+        {
+            if(item->displayName().compare(attributeName) == 0)
+            {
+                columnFields.push_back(item);
             }
-            ui->formLayout->addRow(attributeName, comboBox);
-        }else if(attributeInfo.fieldType() == FieldType::Integer){
-            QSpinBox *spinBox = new QSpinBox(this);
-            spinBox->setProperty("variableName",attributeName);
-            ui->formLayout->addRow(attributeName, spinBox);
-        }else if(attributeInfo.fieldType() == FieldType::Text){
-            QLineEdit *lineEdit = new QLineEdit(this);
-            lineEdit->setProperty("variableName",attributeName);
-            ui->formLayout->addRow(attributeName, lineEdit);
-        }else if(attributeInfo.fieldType() == FieldType::Bool) {
-            QCheckBox *checkBox = new QCheckBox(this);
-            checkBox->setProperty("variableName",attributeName);
-            ui->formLayout->addRow(attributeName, checkBox);
         }
     }
+    foreach(FieldInfo *item, columnFields)
+    {
+        QLabel *label = new QLabel(item->displayName(), this);
+        switch (item->fieldType())
+        {
+        case FieldType::Text:
+        {
+            QLineEdit *lineEdit= new QLineEdit(item->defaultVal(), this);
+            lineEdit->setObjectName(item->name());
+            ui->formLayout->addRow(label,lineEdit);
+        }
+
+              break;
+        case FieldType::DropDown:
+        {
+            QComboBox *combo = new QComboBox(this);
+            for (QMap<QString, QString>::iterator dropItem = item->dropDownValMap()->begin(); dropItem != item->dropDownValMap()->end();++dropItem)
+            {
+                combo->addItem(dropItem.key(), dropItem.value());
+            }
+            if (item->nullable())
+                combo->addItem(QString("(Empty)"));
+            if (!item->isMandetory())
+                combo->addItem(QString("(Not Applicable)"));
+            combo->setCurrentText(item->defaultVal());
+            combo->setObjectName(item->name());
+            ui->formLayout->addRow(label,combo);
+
+        }
+            break;
+        case FieldType::Bool:
+        {
+            QCheckBox *checkBox = new QCheckBox(this);
+            if(!item->isMandetory()){
+                checkBox->setTristate(true);
+            }
+            checkBox->setChecked(item->defaultVal() == "true"? true : false);
+            checkBox->setObjectName(item->name());
+            ui->formLayout->addRow(label,checkBox);
+        }
+            break;
+        case FieldType::Integer:
+        {
+            QSpinBox *spinBox = new QSpinBox(this);
+            spinBox->setMaximum(item->maxRange());
+            spinBox->setMinimum(item->minRange());
+            if(!item->isMandetory()){
+                spinBox->setMinimum(item->minRange()-1);
+                spinBox->setSpecialValueText("(Not Applicable)");
+            }
+            spinBox->setValue(item->defaultVal().toInt());
+            spinBox->setObjectName(item->name());
+            ui->formLayout->addRow(label,spinBox);
+        }
+            break;
+        case FieldType::Invalid:
+        default:
+            break;
+        }
+    }
+
 }
 
 void AddFieldWindow::saveData(){
-    QList<QLineEdit*> allLineEdits = ui->scrollAreaWidgetContents->findChildren<QLineEdit*>();
-    QList<QComboBox*> allComboBoxes = ui->scrollAreaWidgetContents->findChildren<QComboBox*>();
-    QList<QSpinBox*> allSpinBoxes = ui->scrollAreaWidgetContents->findChildren<QSpinBox*>();
-    QList<QCheckBox*> allCheckBoxes = ui->scrollAreaWidgetContents->findChildren<QCheckBox*>();
-    if (allLineEdits.count() > 0){
-        QList<QLineEdit*>::iterator iterator = allLineEdits.begin();
-        while(iterator != allLineEdits.end()){
-            windowData.insert((*iterator)->property("variableName").toString(),(*iterator)->text());
-            iterator++;
+    foreach(FieldInfo * item, *(CacheConfig::getInstance()->columnFieldList()))
+    {
+        switch (item->fieldType())
+        {
+            case FieldType::Text:
+            {
+                QLineEdit *lineEdit = ui->scrollAreaWidgetContents->findChild<QLineEdit*>(item->name());
+                if(lineEdit){
+                    windowData.insert(item->name(),lineEdit->text());
+                }
+            }
+            break;
+            case FieldType::DropDown:
+            {
+                QComboBox *combo = ui->scrollAreaWidgetContents->findChild<QComboBox*>(item->name());
+                if(combo){
+                    windowData.insert(item->name(),combo->currentText());
+                }
+            }
+            break;
+            case FieldType::Bool:
+            {
+                QCheckBox *checkBox = ui->scrollAreaWidgetContents->findChild<QCheckBox*>(item->name());
+                if(checkBox){
+                    if(checkBox->checkState() == Qt::Checked){
+                        windowData.insert(item->name(),"true");
+                    }else if(checkBox->checkState() == Qt::PartiallyChecked){
+                        windowData.insert(item->name(),"(Not Applicable)");
+                    }else{
+                        windowData.insert(item->name(),"false");
+                    }
+                }
+            }
+            break;
+            case FieldType::Integer:
+            {
+                QSpinBox *spinBox = ui->scrollAreaWidgetContents->findChild<QSpinBox*>(item->name());
+                if(spinBox){
+                    if(spinBox->specialValueText().compare("") != 0 && spinBox->value() == spinBox->minimum()){
+                        windowData.insert(item->name(),"(Not Applicable)");
+                    }else{
+                        windowData.insert(item->name(),spinBox->text());
+                    }
+
+                }
+            }
+            break;
         }
     }
-    if (allComboBoxes.count() > 0){
-        QList<QComboBox*>::iterator iterator = allComboBoxes.begin();
-        while(iterator != allComboBoxes.end()){
-            windowData.insert((*iterator)->property("variableName").toString(),(*iterator)->currentText());
-            iterator++;
+    TableController *tableController = (TableController*)this->tableWidget->property("tableController").value<void*>();
+    if(tableController){
+        QMap<QString,QString> *windowData = this->getWindowData();
+        QString returnValue = tableController->addFieldToModel(windowData);
+        if(returnValue.compare("submitted") == 0){
+            qDebug() << "Successfully added the field to the model";
+            tableController->addFieldToTableView(tableController->getDataTable()->getAllFields()->count()-1);
+            accept();
+        }else {
+            this->windowData.clear();
+            QMessageBox msg(QMessageBox::Warning, "Failed to submit form", returnValue);
+            msg.exec();
         }
+
     }
 }

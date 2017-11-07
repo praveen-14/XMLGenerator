@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -34,7 +35,8 @@ SOURCES += \
     TableController.cpp \
     AddAttributeWindow.cpp\
     CacheConfig.cpp\
-    FieldInfo.cpp
+    FieldInfo.cpp \
+    UpdateMetaDataWindow.cpp
 
 HEADERS += \
     MainWindow.h \
@@ -46,9 +48,11 @@ HEADERS += \
     TableController.h \
     AddAttributeWindow.h\
     CacheConfig.h\
-    FieldInfo.h
+    FieldInfo.h \
+    UpdateMetaDataWindow.h
 
 FORMS += \
     AddFieldWindow.ui \
     MainWindow.ui \
-    AddAttributeWindow.ui
+    AddAttributeWindow.ui \
+    UpdateMetaDataWindow.ui

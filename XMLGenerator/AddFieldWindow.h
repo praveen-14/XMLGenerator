@@ -8,6 +8,7 @@
 #include <QLabel>
 #include <QScrollArea>
 #include <TableController.h>
+#include <QMessageBox>
 
 namespace Ui {
 class AddFieldWindow;
@@ -17,8 +18,9 @@ class AddFieldWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddFieldWindow(QWidget *parent = 0,QList<QString> *attributesList = 0,CacheConfig *config = 0);
+    explicit AddFieldWindow(QWidget *parent = 0,QTableWidget *tableWidget = 0 );
     ~AddFieldWindow();
+
     QMap<QString,QString>* getWindowData();
 
 public slots:
@@ -28,7 +30,6 @@ public slots:
 private:
    Ui::AddFieldWindow *ui;
    QMap<QString,QString> windowData;
-   QList<QString> attributesList;
-   CacheConfig config;
+   QTableWidget *tableWidget;
 };
 #endif // ADDFIELDWINDOW_H
