@@ -8,13 +8,12 @@ class TableCell;
 class TableRow
 {
     public:
-        TableRow(int row);
+        TableRow();
         ~TableRow();
         void addCell(TableCell *cell);
         QList<TableCell*>* getRowCells();
-        void setRowIndex(int row);
-        int getRowIndex();
+//        void setRowIndex(int row);
     private:
         QList<TableCell*> rowCells;
-        int rowIndex;
+//        int rowIndex;
 };

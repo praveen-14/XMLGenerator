@@ -5,6 +5,11 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+//    QFile File("C:\\Users\\praveense\\Desktop\\darkorange.stylesheet.txt");
+//    File.open(QFile::ReadOnly);
+//    QString StyleSheet = QLatin1String(File.readAll());
+
+//    a.setStyleSheet(StyleSheet);
     QApplication::setStyle(QStyleFactory::create("fusion"));
     MainWindow w;
     w.show();

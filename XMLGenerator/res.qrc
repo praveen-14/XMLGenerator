@@ -1,1 +1,25 @@
-<RCC/>
+<RCC>
+    <qresource prefix="/">
+        <file>icons/1-33-512.png</file>
+        <file>icons/800px_COLOURBOX5697436.png</file>
+        <file>icons/arrow-png-22.png</file>
+        <file>icons/canva-git-commit-vector-icon-MACViUlQ8Ao.png</file>
+        <file>icons/Close1.png</file>
+        <file>icons/Close2.png</file>
+        <file>icons/Delete.png</file>
+        <file>icons/Folders_Sub.png</file>
+        <file>icons/if_file-xml_83293.png</file>
+        <file>icons/if_Save-as_70651.png</file>
+        <file>icons/if_stock_delete-column-16_93910.png</file>
+        <file>icons/if_stock_delete-row-16_93914.png</file>
+        <file>icons/media.png</file>
+        <file>icons/No_tick.png</file>
+        <file>icons/plus_add_green.png</file>
+        <file>icons/Project1.png</file>
+        <file>icons/Save_Filter.png</file>
+        <file>icons/Save-icon.png</file>
+        <file>icons/Spread_Graph_Legend_Light.png</file>
+        <file>icons/table_column_add.png</file>
+        <file>icons/table_row_add.png</file>
+    </qresource>
+</RCC>

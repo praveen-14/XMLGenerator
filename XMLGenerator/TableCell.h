@@ -7,7 +7,7 @@
 class TableCell
 {
     public:
-        TableCell(int row,int column);
+        TableCell();
         ~TableCell();
         void setValue(QString data);
 
@@ -15,17 +15,17 @@ class TableCell
 
         void setColumnIndex(int column);
 
-        void setRowIndex(int row);
+//        void setRowIndex(int row);
 
         QString getValue();
         FieldInfo* getField();
-        int getRowIndex();
+//        int getRowIndex();
         int getColumnIndex();
     private:
         QString value;
         FieldInfo *field;
-        int columnIndex;
-        int rowIndex;
+//        int columnIndex;
+//        int rowIndex;
 
 };
 #endif // TABLECELL_H

@@ -36,7 +36,14 @@ SOURCES += \
     AddAttributeWindow.cpp\
     CacheConfig.cpp\
     FieldInfo.cpp \
-    UpdateMetaDataWindow.cpp
+    UpdateMetaDataWindow.cpp \
+    Change.cpp \
+    AddEnum.cpp \
+    Enum.cpp \
+    FindDiff.cpp \
+    CheckBoxHeader.cpp \
+    Version.cpp \
+    CommitWindow.cpp
 
 HEADERS += \
     MainWindow.h \
@@ -49,10 +56,23 @@ HEADERS += \
     AddAttributeWindow.h\
     CacheConfig.h\
     FieldInfo.h \
-    UpdateMetaDataWindow.h
+    UpdateMetaDataWindow.h \
+    Change.h \
+    AddEnum.h \
+    Enum.h \
+    FindDiff.h \
+    CheckBoxHeader.h \
+    Version.h \
+    CommitWindow.h
 
 FORMS += \
     AddFieldWindow.ui \
     MainWindow.ui \
     AddAttributeWindow.ui \
-    UpdateMetaDataWindow.ui
+    UpdateMetaDataWindow.ui \
+    AddEnum.ui \
+    FindDiff.ui \
+    CommitWindow.ui
+
+RESOURCES += \
+    res.qrc

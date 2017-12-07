@@ -11,6 +11,7 @@
 #include <QSignalMapper>
 #include <MainWindow.h>
 #include <TableController.h>
+#include <QLayout>
 
 namespace Ui {
 class UpdateMetaDataWindow;

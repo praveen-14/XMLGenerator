@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>774</width>
-    <height>800</height>
+    <width>500</width>
+    <height>550</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Update Meta Data</string>
@@ -24,8 +30,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>754</width>
-        <height>753</height>
+        <width>480</width>
+        <height>503</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
@@ -37,7 +43,7 @@
          <layout class="QFormLayout" name="cacheFieldsFormLayout"/>
         </widget>
        </item>
-       <item row="1" column="0">
+       <item row="0" column="1">
         <widget class="QGroupBox" name="messageFields">
          <property name="title">
           <string>Message Fields</string>
@@ -45,13 +51,13 @@
          <layout class="QFormLayout" name="messageFieldsFormLayout"/>
         </widget>
        </item>
-       <item row="2" column="0">
+       <item row="2" column="0" colspan="2">
         <widget class="QGroupBox" name="defaultSortOrder">
          <property name="title">
           <string>Default Sort Order</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="0" column="0">
+          <item row="1" column="0">
            <layout class="QFormLayout" name="formLayout">
             <item row="0" column="0">
              <widget class="QLabel" name="fieldNameLabel">
@@ -61,7 +67,14 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QComboBox" name="fieldNameComboBox"/>
+             <widget class="QComboBox" name="fieldNameComboBox">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
             </item>
             <item row="1" column="0">
              <widget class="QLabel" name="sortOrderLabel">
@@ -71,41 +84,93 @@
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QComboBox" name="sortOrderComboBox">
-              <property name="currentText">
-               <string>Ascending</string>
+             <widget class="QWidget" name="widget" native="true">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
-              <property name="currentIndex">
-               <number>0</number>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
               </property>
-              <item>
-               <property name="text">
-                <string>Ascending</string>
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <property name="leftMargin">
+                <number>0</number>
                </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Descending</string>
+               <property name="topMargin">
+                <number>0</number>
                </property>
-              </item>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QPushButton" name="addSortOrderButton">
-              <property name="text">
-               <string>Add Sort Order</string>
-              </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>9</number>
+               </property>
+               <item>
+                <widget class="QComboBox" name="sortOrderComboBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="currentText">
+                  <string>Ascending</string>
+                 </property>
+                 <property name="currentIndex">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>Ascending</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Descending</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="addSortOrderButton">
+                 <property name="text">
+                  <string>  Add Sort Order</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="res.qrc">
+                   <normaloff>:/icons/800px_COLOURBOX5697436.png</normaloff>:/icons/800px_COLOURBOX5697436.png</iconset>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </widget>
             </item>
            </layout>
           </item>
-          <item row="1" column="0">
+          <item row="2" column="0" colspan="2">
            <widget class="QTableWidget" name="tableWidget">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <attribute name="horizontalHeaderDefaultSectionSize">
-             <number>250</number>
+             <number>195</number>
+            </attribute>
+            <attribute name="horizontalHeaderMinimumSectionSize">
+             <number>40</number>
             </attribute>
             <attribute name="horizontalHeaderStretchLastSection">
              <bool>true</bool>
+            </attribute>
+            <attribute name="verticalHeaderDefaultSectionSize">
+             <number>30</number>
             </attribute>
             <column>
              <property name="text">
@@ -143,7 +208,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

@@ -9,9 +9,9 @@ class CacheConfig : QObject
 	Q_OBJECT
 
 public:
+    CacheConfig(QObject *parent);
 	virtual ~CacheConfig();
-	static CacheConfig* getInstance() { return &m_instance; }
-	bool init();
+    bool init(QString filePath);
 
 	QList<FieldInfo *>* cacheFieldList();
 	QList<FieldInfo *>* messageFieldList();
@@ -24,12 +24,8 @@ public:
     void addColumnField(FieldInfo *field);
 
 private:
-	CacheConfig(QObject *parent);
 	void populateFieldInfo(QXmlStreamReader* reader, QList<FieldInfo *>* container);
 	void loadEnumsFromFile(QString file, FieldInfo* info);
-
-	static CacheConfig m_instance;
-
 
 	QList<FieldInfo *> m_cacheFieldsList;
 	QList<FieldInfo *> m_messageFieldsList;

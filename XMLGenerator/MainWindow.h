@@ -10,6 +10,11 @@
 #include <QTableWidget>
 #include <QVariant>
 #include <CacheConfig.h>
+#include <AddEnum.h>
+#include <QTreeWidgetItem>
+#include <CommitWindow.h>
+#include <QMovie>
+#include <QTreeWidgetItemIterator>
 
 class Table;
 class TableController;
@@ -29,7 +34,9 @@ public:
 
     static MainWindow* mainWindow;
 
-    void addTableController(XMLFileData *xmlData);
+    void addTableController(XMLFileData *xmlData, int tabIndex);
+
+    void setCommitMessage(QString message);
 
     Table* getTableModel(QTableWidget *tableWidget);
     FileController* getFileController();
@@ -37,8 +44,10 @@ public:
     TableController* getTableController(QString key);
     QIcon* getWarningIcon();
 
+    void saveEnum(Enum *newEnum, QString *filePath);
+
 public slots:
-    void loadFile();
+    void loadFile(QString *filePath = 0, int tabIndex = -1);
     void addField();
     void addAttribute();
     void setSelectedRow(int row);
@@ -46,9 +55,13 @@ public slots:
     void deleteRow();
     void deleteColumn();
     void tabChanged();
-    void save();
+    void save(int commit = 0);
+    void saveAndCommit();
     void updateMetaData();
-    void closeTab(int index);
+    void closeTab(QWidget *sender);
+    void addProduct();
+    void addEnum();
+    void versionChanged(QTreeWidgetItem* sender, int column);
 
 private:
     Ui::MainWindow *ui;
@@ -57,6 +70,8 @@ private:
     QIcon warningIcon;
     int selectedRow;
     int selectedColumn;
+    QSignalMapper signalMapper;
+    QString commitMessage;
 
 //    QList<QString> allProperties;
 //    QMap<QString, QList<QString>> XMLData = QMap<QString, QList<QString>>();

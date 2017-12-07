@@ -1,6 +1,6 @@
 #include <TableCell.h>
 
-TableCell::TableCell(int row, int column) : columnIndex(column) , rowIndex(row)
+TableCell::TableCell()
 {
 //    valueSet = *(new QList<QString>());
 }
@@ -17,13 +17,13 @@ void TableCell::setField(FieldInfo *field){
     this->field = field;
 }
 
-void TableCell::setColumnIndex(int column){
-    this->columnIndex = column;
-}
+//void TableCell::setColumnIndex(int column){
+//    this->columnIndex = column;
+//}
 
-void TableCell::setRowIndex(int row){
-    this->rowIndex = row;
-}
+//void TableCell::setRowIndex(int row){
+//    this->rowIndex = row;
+//}
 
 FieldInfo* TableCell::getField(){
     return this->field;
@@ -33,10 +33,10 @@ QString TableCell::getValue(){
     return value;
 }
 
-int TableCell::getRowIndex(){
-    return this->rowIndex;
-}
+//int TableCell::getRowIndex(){
+//    return this->rowIndex;
+//}
 
-int TableCell::getColumnIndex(){
-    return this->columnIndex;
-}
+//int TableCell::getColumnIndex(){
+//    return this->columnIndex;
+//}

@@ -28,6 +28,8 @@ public:
     ~AddAttributeWindow();
 
     FieldInfo* getNewField();
+    void setFieldName(QString fieldName);
+    void setFieldData(QList<QString> *fieldData);
 
 public slots:
     void saveData();
@@ -43,6 +45,7 @@ private:
     int newValueID;
     QTableWidget *tableWidget;
     QSignalMapper *signalMapper;
+    QList<QString> *fieldData;
 };
 
 #endif // ADDATTRIBUTEWINDOW_H

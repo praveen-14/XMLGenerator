@@ -35,48 +35,69 @@ void Table::removeField(int index)
     this->allFields.removeAt(index);
 }
 
+QList<QString>* Table::getAvailableAttributes()
+{
+    return &availableAttributes;
+}
+
+void Table::setAvailableAttributes(QList<QString> *availableAttributes)
+{
+    this->availableAttributes = *availableAttributes;
+}
+
+QList<QString>* Table::getNewEnums()
+{
+    return &(newEnums);
+}
+
+//void Table::addNewEnum(QString newEnum)
+//{
+//    newEnums.push_back(newEnum);
+//}
+
+void Table::removeEnum(int index)
+{
+    newEnums.removeAt(index);
+}
+
 void Table::addCell(int row, int column, QString value , FieldInfo *field){
     bool rowExists = false;
     QString unresolvedValue = value;
     QString resolvedValue = value;
     if(field->fieldType() == FieldType::DropDown){
+        bool valueFound = false;
         QMap<QString,QString>::iterator valueIterator = field->dropDownValMap()->begin();
         while(valueIterator != field->dropDownValMap()->end()){
             if(valueIterator.value().compare(unresolvedValue) == 0){
                 resolvedValue = valueIterator.key();
+                valueFound = true;
                 break;
             }
             valueIterator++;
         }
-    }
-    for ( QList<TableRow*>::iterator tableRow = this->getRows()->begin(); tableRow != this->getRows()->end(); ++tableRow)
-    {
-        if((*tableRow)->getRowIndex()==row)
-        {
-            TableCell* cell = new TableCell(row,column);
-            cell->setValue(resolvedValue);
-            cell->setField(field);
-            cell->setColumnIndex(column);
-            cell->setRowIndex(row);
-            (*tableRow)->addCell(cell);
-            if(!field->nullable() && resolvedValue.compare(QString("")) == 0){
-                errorsMap.insert(cell,field->displayName() + " cannot be empty \n");
-            }else if(field->isMandetory() && resolvedValue.compare(QString("(Not Applicable)")) == 0){
-                errorsMap.insert(cell,field->displayName() + " is mandatory \n");
-            }
-            rowExists = true;
-            break;
+        if(!valueFound && value.compare("(Not Applicable)") != 0 && !newEnums.contains(value)){
+            newEnums.push_back(value);
         }
+    }
+    if(row <= tableRows.size()-1)
+    {
+        TableCell* cell = new TableCell();
+        cell->setValue(resolvedValue);
+        cell->setField(field);
+        tableRows.at(row)->addCell(cell);
+        if(!field->nullable() && resolvedValue.compare(QString("")) == 0){
+            errorsMap.insert(cell,field->displayName() + " cannot be empty \n");
+        }else if(field->isMandetory() && resolvedValue.compare(QString("(Not Applicable)")) == 0){
+            errorsMap.insert(cell,field->displayName() + " is mandatory \n");
+        }
+        rowExists = true;
     }
     if(!rowExists)
     {
-        TableRow *newRow = new TableRow(row);
-        newRow->setRowIndex(row);
-        TableCell *cell = new TableCell(row,column);
+        TableRow *newRow = new TableRow();
+        TableCell *cell = new TableCell();
         cell->setValue(resolvedValue);
         cell->setField(field);
-        cell->setColumnIndex(column);
-        cell->setRowIndex(row);
         newRow->addCell(cell);
         this->addRow(newRow);
         if(!field->nullable() && resolvedValue.compare("") == 0){
@@ -124,7 +145,7 @@ void Table::addAttribute(QString attributeName)
     this->getAllAttributes()->push_back(attributeName);
 }
 
-QString Table::addAttributeToModel(FieldInfo *newField){
+QString Table::addAttributeToModel(FieldInfo *newField, CacheConfig *config){
     QString errorString;
     QString attributeName = newField->name().trimmed();
     QString displayName = newField->displayName().trimmed();
@@ -154,17 +175,17 @@ QString Table::addAttributeToModel(FieldInfo *newField){
         for(int row=0;row<this->getAllFields()->count();row++){
             this->addCell(row,this->getAllAttributes()->count()-1,newField->defaultVal(),newField);
         }
-        CacheConfig::getInstance()->columnFieldList()->push_back(newField);
+
+        config->columnFieldList()->push_back(newField);
         return QString("submitted");
     }else{
         return errorString;
     }
 }
 
-QString Table::addFieldToModel(QMap<QString,QString> *fieldData){
+QString Table::addFieldToModel(QMap<QString,QString> *fieldData, CacheConfig *config){
     QString fieldName;
     QString errorStringGlobal;
-    CacheConfig *config = CacheConfig::getInstance();
     QList<FieldInfo*> validatedFields;
     QList<QString> validatedValues;
     for(int column=0;column<this->getAllAttributes()->count();column++){
@@ -207,7 +228,6 @@ QString Table::addFieldToModel(QMap<QString,QString> *fieldData){
 QString Table::validate(QString value, FieldInfo *field){
     QString errorString;
     if(!field->nullable() && value.size() == 0){
-        qDebug() << value;
         errorString = errorString + "'" + field->displayName() + "'" + " cannot be empty. \n";
     }
     if(field->fieldType() == FieldType::Text){

@@ -22,7 +22,11 @@ UpdateMetaDataWindow::~UpdateMetaDataWindow()
 
 void UpdateMetaDataWindow::addSortOrder(){
     ui->tableWidget->setRowCount(ui->tableWidget->rowCount()+1);
-    QPushButton *removeBtn = new QPushButton("Remove", ui->tableWidget);
+    QPushButton *removeBtn = new QPushButton("", ui->tableWidget);
+    removeBtn->setFlat(true);
+    removeBtn->setSizePolicy(QSizePolicy::Fixed , QSizePolicy::Fixed);
+    QIcon *removeIcon = new QIcon(":/icons/Delete.png");
+    removeBtn->setIcon(*removeIcon);
     removeBtn->setProperty("id",sortOrderID);
     for(int row = 0; row < tableWidget->rowCount(); row++){
         if(ui->fieldNameComboBox->currentText().compare(((QLineEdit*)(this->tableWidget->cellWidget(row,1)))->text()) == 0){
@@ -36,6 +40,9 @@ void UpdateMetaDataWindow::addSortOrder(){
     ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, 1, new QTableWidgetItem(ui->sortOrderComboBox->currentText()));
     ui->tableWidget->setCellWidget(ui->tableWidget->rowCount()-1, 2, removeBtn);
     ui->fieldNameComboBox->removeItem(ui->fieldNameComboBox->currentIndex());
+    if(ui->fieldNameComboBox->count() == 0){
+        ui->addSortOrderButton->setEnabled(false);
+    }
     sortOrderID++;
 }
 
@@ -43,7 +50,8 @@ void UpdateMetaDataWindow::populateWindow(){
     ui->tableWidget->verticalHeader()->setSectionsMovable(true);
     ui->tableWidget->verticalHeader()->setDragEnabled(true);
     ui->tableWidget->verticalHeader()->setDragDropMode(QAbstractItemView::InternalMove);
-    CacheConfig *config = CacheConfig::getInstance();
+    TableController *tableController = (TableController*)this->tableWidget->property("tableController").value<void*>();
+    CacheConfig *config = tableController->getConfig();
     QList<FieldInfo*> *cacheFieldList = config->cacheFieldList();
     QList<FieldInfo*> *messageFieldList = config->messageFieldList();
     foreach(FieldInfo *item , *cacheFieldList){
@@ -72,17 +80,22 @@ void UpdateMetaDataWindow::populateWindow(){
                 combo->addItem(QString("(Not Applicable)"));
             combo->setCurrentText(item->defaultVal());
             combo->setObjectName(item->name());
+            combo->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
             if(item->dropDownValMap()->size() == 0){
                 for(int row = 0; row < tableWidget->rowCount(); row++ ){
                     combo->addItem(((QLineEdit*)(this->tableWidget->cellWidget(row,1)))->text(), ((QLineEdit*)(this->tableWidget->cellWidget(row,0)))->text());
                 }
             }
             QString value = getValue(item, metaCacheData);
-            for(int comboItem = 0; comboItem < combo->count(); comboItem++){
-                if(combo->itemText(comboItem).compare(value) == 0){
-                    combo->setCurrentIndex(comboItem);
-                    break;
+            if(value.size() > 0){
+                for(int comboItem = 0; comboItem < combo->count(); comboItem++){
+                    if(combo->itemText(comboItem).compare(value) == 0){
+                        combo->setCurrentIndex(comboItem);
+                        break;
+                    }
                 }
+            }else{
+
             }
             ui->cacheFieldsFormLayout->addRow(label,combo);
 
@@ -90,13 +103,19 @@ void UpdateMetaDataWindow::populateWindow(){
             break;
         case FieldType::Bool:
         {
+            QWidget *widget = new QWidget(this);
+            QHBoxLayout *layout = new QHBoxLayout(this);
+            layout->setContentsMargins(3,0,0,0);
             QCheckBox *checkBox = new QCheckBox(ui->cacheFields);
             checkBox->setChecked(item->defaultVal() == "true"? true : false);
             checkBox->setObjectName(item->name());
             if(getValue(item, metaCacheData).compare("true") == 0){
                 checkBox->setChecked(true);
             }
-            ui->cacheFieldsFormLayout->addRow(label,checkBox);
+            layout->addWidget(checkBox,1);
+            layout->addWidget(label,10);
+            widget->setLayout(layout);
+            ui->cacheFieldsFormLayout->addRow("",widget);
         }
             break;
         case FieldType::Integer:
@@ -107,6 +126,7 @@ void UpdateMetaDataWindow::populateWindow(){
             spinBox->setValue(item->defaultVal().toInt());
             spinBox->setObjectName(item->name());
             spinBox->setValue(getValue(item, metaCacheData).toInt());
+            spinBox->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
             ui->cacheFieldsFormLayout->addRow(label,spinBox);
         }
             break;
@@ -141,6 +161,7 @@ void UpdateMetaDataWindow::populateWindow(){
                 combo->addItem(QString("(Not Applicable)"));
             combo->setCurrentText(item->defaultVal());
             combo->setObjectName(item->name());
+            combo->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
             if(item->dropDownValMap()->size() == 0){
                 for(int row = 0; row < tableWidget->rowCount(); row++ ){
                     combo->addItem(((QLineEdit*)(this->tableWidget->cellWidget(row,1)))->text(), ((QLineEdit*)(this->tableWidget->cellWidget(row,0)))->text());
@@ -176,6 +197,7 @@ void UpdateMetaDataWindow::populateWindow(){
             spinBox->setValue(item->defaultVal().toInt());
             spinBox->setObjectName(item->name());
             spinBox->setValue(getValue(item, metaMessageData).toInt());
+            spinBox->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
             ui->messageFieldsFormLayout->addRow(label,spinBox);
         }
             break;
@@ -197,7 +219,11 @@ void UpdateMetaDataWindow::populateWindow(){
         }else{
             ui->tableWidget->setItem(sortItem,1,new QTableWidgetItem("Descending"));
         }
-        QPushButton *removeBtn = new QPushButton("Remove", ui->tableWidget);
+        QPushButton *removeBtn = new QPushButton("", ui->tableWidget);
+        removeBtn->setFlat(true);
+        removeBtn->setSizePolicy(QSizePolicy::Fixed , QSizePolicy::Fixed);
+        QIcon *removeIcon = new QIcon(":/icons/Delete.png");
+        removeBtn->setIcon(*removeIcon);
         removeBtn->setProperty("id", sortOrderID);
         removeBtn->setProperty("rowName", defaultSortList->at(sortItem).at(0));
         signalMapper->setMapping(removeBtn,sortOrderID);
@@ -218,6 +244,9 @@ void UpdateMetaDataWindow::populateWindow(){
             ui->fieldNameComboBox->addItem(((QLineEdit*)(this->tableWidget->cellWidget(row,1)))->text());
         }
     }
+    ui->tableWidget->setColumnWidth(0,180);
+    ui->tableWidget->setColumnWidth(1,180);
+    ui->tableWidget->setColumnWidth(2,40);
 }
 
 QString UpdateMetaDataWindow::getValue(FieldInfo *field, QList<QList<QString>> *list){
@@ -241,6 +270,7 @@ QString UpdateMetaDataWindow::getValue(FieldInfo *field, QList<QList<QString>> *
             }
         }
     }
+    return "";
 }
 
 void UpdateMetaDataWindow::removeValue(int id){
@@ -251,186 +281,189 @@ void UpdateMetaDataWindow::removeValue(int id){
         {
             QComboBox *fieldCombo = ui->fieldNameComboBox;
             fieldCombo->addItem(tableWidget->item(row,0)->text());
-            tableWidget->removeRow(row);
+            tableWidget->model()->removeRow(row);
             break;
         }
     }
+    ui->addSortOrderButton->setEnabled(true);
 }
 
 void UpdateMetaDataWindow::saveData(){
     QList<QList<QString>> updatedMetaCacheData;
     QList<QList<QString>> updatedMetaMessageData;
     QList<QList<QString>> updatedDefaultSortList;
-    foreach(FieldInfo * item, *(CacheConfig::getInstance()->cacheFieldList()))
-    {
-        switch (item->fieldType())
-        {
-            case FieldType::Text:
-            {
-                QLineEdit *lineEdit = ui->cacheFields->findChild<QLineEdit*>(item->name());
-                if(lineEdit){
-                    for(int cacheItem = 0; cacheItem < metaCacheData->size(); cacheItem++){
-                        if(metaCacheData->at(cacheItem).at(0).compare(item->name()) == 0){
-                            QList<QString> data;
-                            data.append(item->name());
-                            data.append(lineEdit->text());
-                            updatedMetaCacheData.append(data);
-                            break;
-                        }
-                    }
-                }
-            }
-            break;
-            case FieldType::DropDown:
-            {
-                QComboBox *combo = ui->cacheFields->findChild<QComboBox*>(item->name());
-                if(combo){
-                    for(int cacheItem = 0; cacheItem < metaCacheData->size(); cacheItem++){
-                        if(metaCacheData->at(cacheItem).at(0).compare(item->name()) == 0){
-                            QList<QString> data;
-                            data.append(item->name());
-                            if(!combo->itemData(combo->currentIndex()).isNull()){
-                                data.append(combo->itemData(combo->currentIndex()).toString());
-                            }else{
-                                data.append(combo->currentText());
-                            }
-                            updatedMetaCacheData.append(data);
-                            break;
-                        }
-                    }
-                }
-            }
-            break;
-            case FieldType::Bool:
-            {
-                QCheckBox *checkBox = ui->cacheFields->findChild<QCheckBox*>(item->name());
-                if(checkBox){
-                    for(int cacheItem = 0; cacheItem < metaCacheData->size(); cacheItem++){
-                        if(metaCacheData->at(cacheItem).at(0).compare(item->name()) == 0){
-                            QList<QString> data;
-                            data.append(item->name());
-                            if(checkBox->isChecked() == true){
-                                data.append("true");
-                            }else
-                                data.append("false");
-                            updatedMetaCacheData.append(data);
-                            break;
-                        }
-                    }
-                }
-            }
-            break;
-            case FieldType::Integer:
-            {
-                QSpinBox *spinBox = ui->cacheFields->findChild<QSpinBox*>(item->name());
-                if(spinBox){
-                    for(int cacheItem = 0; cacheItem < metaCacheData->size(); cacheItem++){
-                        if(metaCacheData->at(cacheItem).at(0).compare(item->name()) == 0){
-                            QList<QString> data;
-                            data.append(item->name());
-                            data.append(spinBox->text());
-                            updatedMetaCacheData.append(data);
-                            break;
-                        }
-                    }
-                }
-            }
-            break;
-        }
-    }
-    foreach(FieldInfo * item, *(CacheConfig::getInstance()->messageFieldList()))
-    {
-        switch (item->fieldType())
-        {
-            case FieldType::Text:
-            {
-                QLineEdit *lineEdit = ui->messageFields->findChild<QLineEdit*>(item->name());
-                if(lineEdit){
-                    for(int cacheItem = 0; cacheItem < metaMessageData->size(); cacheItem++){
-                        if(metaMessageData->at(cacheItem).at(0).compare(item->name()) == 0){
-                            QList<QString> data;
-                            data.append(item->name());
-                            data.append(lineEdit->text());
-                            updatedMetaMessageData.append(data);
-                            break;
-                        }
-                    }
-                }
-            }
-            break;
-            case FieldType::DropDown:
-            {
-                QComboBox *combo = ui->messageFields->findChild<QComboBox*>(item->name());
-                if(combo){
-                    for(int cacheItem = 0; cacheItem < metaMessageData->size(); cacheItem++){
-                        if(metaMessageData->at(cacheItem).at(0).compare(item->name()) == 0){
-                            QList<QString> data;
-                            data.append(item->name());
-                            if(!combo->itemData(combo->currentIndex()).isNull()){
-                                data.append(combo->itemData(combo->currentIndex()).toString());
-                            }else{
-                                data.append(combo->currentText());
-                            }
-                            updatedMetaMessageData.append(data);
-                            break;
-                        }
-                    }
-                }
-            }
-            break;
-            case FieldType::Bool:
-            {
-                QCheckBox *checkBox = ui->messageFields->findChild<QCheckBox*>(item->name());
-                if(checkBox){
-                    for(int cacheItem = 0; cacheItem < metaMessageData->size(); cacheItem++){
-                        if(metaMessageData->at(cacheItem).at(0).compare(item->name()) == 0){
-                            QList<QString> data;
-                            data.append(item->name());
-                            if(checkBox->isChecked() == true){
-                                data.append("true");
-                            }else
-                                data.append("false");
-                            updatedMetaMessageData.append(data);
-                            break;
-                        }
-                    }
-                }
-            }
-            break;
-            case FieldType::Integer:
-            {
-                QSpinBox *spinBox = ui->messageFields->findChild<QSpinBox*>(item->name());
-                if(spinBox){
-                    for(int cacheItem = 0; cacheItem < metaMessageData->size(); cacheItem++){
-                        if(metaMessageData->at(cacheItem).at(0).compare(item->name()) == 0){
-                            QList<QString> data;
-                            data.append(item->name());
-                            data.append(spinBox->text());
-                            updatedMetaMessageData.append(data);
-                            break;
-                        }
-                    }
-                }
-            }
-            break;
-        }
-    }
-    for(int row = 0; row < ui->tableWidget->rowCount(); row++){
-        QList<QString> testList;
-        updatedDefaultSortList.append(testList);
-    }
-    for(int row = 0; row < ui->tableWidget->rowCount(); row++){
-        QList<QString> data;
-        data.append(ui->tableWidget->cellWidget(row,2)->property("rowName").toString());
-        if(ui->tableWidget->item(row,1)->text().compare("Ascending") == 0){
-            data.append("1");
-        }else{
-            data.append("0");
-        }
-        updatedDefaultSortList.replace(ui->tableWidget->visualRow(row), data);
-    }
     TableController *tableController = (TableController*)this->tableWidget->property("tableController").value<void*>();
     if(tableController){
+        foreach(FieldInfo * item, *(tableController->getConfig()->cacheFieldList()))
+        {
+            switch (item->fieldType())
+            {
+                case FieldType::Text:
+                {
+                    QLineEdit *lineEdit = ui->cacheFields->findChild<QLineEdit*>(item->name());
+                    if(lineEdit){
+                        for(int cacheItem = 0; cacheItem < metaCacheData->size(); cacheItem++){
+                            if(metaCacheData->at(cacheItem).at(0).compare(item->name()) == 0){
+                                QList<QString> data;
+                                data.append(item->name());
+                                data.append(lineEdit->text());
+                                updatedMetaCacheData.append(data);
+                                break;
+                            }
+                        }
+                    }
+                }
+                break;
+                case FieldType::DropDown:
+                {
+                    QComboBox *combo = ui->cacheFields->findChild<QComboBox*>(item->name());
+                    if(combo){
+                        for(int cacheItem = 0; cacheItem < metaCacheData->size(); cacheItem++){
+                            if(metaCacheData->at(cacheItem).at(0).compare(item->name()) == 0){
+                                QList<QString> data;
+                                data.append(item->name());
+                                if(!combo->itemData(combo->currentIndex()).isNull()){
+                                    data.append(combo->itemData(combo->currentIndex()).toString());
+                                }else{
+                                    data.append(combo->currentText());
+                                }
+                                updatedMetaCacheData.append(data);
+                                break;
+                            }
+                        }
+                    }
+                }
+                break;
+                case FieldType::Bool:
+                {
+                    QCheckBox *checkBox = ui->cacheFields->findChild<QCheckBox*>(item->name());
+                    if(checkBox){
+                        for(int cacheItem = 0; cacheItem < metaCacheData->size(); cacheItem++){
+                            if(metaCacheData->at(cacheItem).at(0).compare(item->name()) == 0){
+                                QList<QString> data;
+                                data.append(item->name());
+                                if(checkBox->isChecked() == true){
+                                    data.append("true");
+                                }else
+                                    data.append("false");
+                                updatedMetaCacheData.append(data);
+                                break;
+                            }
+                        }
+                    }
+                }
+                break;
+                case FieldType::Integer:
+                {
+                    QSpinBox *spinBox = ui->cacheFields->findChild<QSpinBox*>(item->name());
+                    if(spinBox){
+                        for(int cacheItem = 0; cacheItem < metaCacheData->size(); cacheItem++){
+                            if(metaCacheData->at(cacheItem).at(0).compare(item->name()) == 0){
+                                QList<QString> data;
+                                data.append(item->name());
+                                data.append(spinBox->text());
+                                updatedMetaCacheData.append(data);
+                                break;
+                            }
+                        }
+                    }
+                }
+                break;
+            }
+        }
+        foreach(FieldInfo * item, *(tableController->getConfig()->messageFieldList()))
+        {
+            switch (item->fieldType())
+            {
+                case FieldType::Text:
+                {
+                    QLineEdit *lineEdit = ui->messageFields->findChild<QLineEdit*>(item->name());
+                    if(lineEdit){
+                        for(int cacheItem = 0; cacheItem < metaMessageData->size(); cacheItem++){
+                            if(metaMessageData->at(cacheItem).at(0).compare(item->name()) == 0){
+                                QList<QString> data;
+                                data.append(item->name());
+                                data.append(lineEdit->text());
+                                updatedMetaMessageData.append(data);
+                                break;
+                            }
+                        }
+                    }
+                }
+                break;
+                case FieldType::DropDown:
+                {
+                    QComboBox *combo = ui->messageFields->findChild<QComboBox*>(item->name());
+                    if(combo){
+                        for(int cacheItem = 0; cacheItem < metaMessageData->size(); cacheItem++){
+                            if(metaMessageData->at(cacheItem).at(0).compare(item->name()) == 0){
+                                QList<QString> data;
+                                data.append(item->name());
+                                if(!combo->itemData(combo->currentIndex()).isNull()){
+                                    data.append(combo->itemData(combo->currentIndex()).toString());
+                                }else{
+                                    data.append(combo->currentText());
+                                }
+                                updatedMetaMessageData.append(data);
+                                break;
+                            }
+                        }
+                    }
+                }
+                break;
+                case FieldType::Bool:
+                {
+                    QCheckBox *checkBox = ui->messageFields->findChild<QCheckBox*>(item->name());
+                    if(checkBox){
+                        for(int cacheItem = 0; cacheItem < metaMessageData->size(); cacheItem++){
+                            if(metaMessageData->at(cacheItem).at(0).compare(item->name()) == 0){
+                                QList<QString> data;
+                                data.append(item->name());
+                                if(checkBox->isChecked() == true){
+                                    data.append("true");
+                                }else
+                                    data.append("false");
+                                updatedMetaMessageData.append(data);
+                                break;
+                            }
+                        }
+                    }
+                }
+                break;
+                case FieldType::Integer:
+                {
+                    QSpinBox *spinBox = ui->messageFields->findChild<QSpinBox*>(item->name());
+                    if(spinBox){
+                        for(int cacheItem = 0; cacheItem < metaMessageData->size(); cacheItem++){
+                            if(metaMessageData->at(cacheItem).at(0).compare(item->name()) == 0){
+                                QList<QString> data;
+                                data.append(item->name());
+                                data.append(spinBox->text());
+                                updatedMetaMessageData.append(data);
+                                break;
+                            }
+                        }
+                    }
+                }
+                break;
+            }
+        }
+        for(int row = 0; row < ui->tableWidget->rowCount(); row++){
+            QList<QString> testList;
+            updatedDefaultSortList.append(testList);
+        }
+        for(int row = 0; row < ui->tableWidget->rowCount(); row++){
+            QList<QString> data;
+            data.append(ui->tableWidget->cellWidget(row,2)->property("rowName").toString());
+            if(ui->tableWidget->item(row,1)->text().compare("Ascending") == 0){
+                data.append("1");
+            }else{
+                data.append("0");
+            }
+            updatedDefaultSortList.replace(ui->tableWidget->visualRow(row), data);
+        }
+
+
         QList<QList<QList<QString>>> allMetaDataChanges;
         allMetaDataChanges.append(updatedMetaCacheData);
         allMetaDataChanges.append(updatedMetaMessageData);

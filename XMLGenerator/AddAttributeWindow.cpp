@@ -8,6 +8,7 @@ AddAttributeWindow::AddAttributeWindow(QWidget *parent , QTableWidget *tableWidg
 {
     this->signalMapper = new QSignalMapper(this);
     newValueID = 0;
+    fieldData = nullptr;
     this->tableWidget = tableWidget;
     ui->setupUi(this);
     connect(ui->valueTypeComboBox,SIGNAL(currentIndexChanged(const QString&)),this,SLOT(populateWindow(const QString&)));
@@ -18,6 +19,16 @@ AddAttributeWindow::AddAttributeWindow(QWidget *parent , QTableWidget *tableWidg
 AddAttributeWindow::~AddAttributeWindow()
 {
     delete ui;
+}
+
+void AddAttributeWindow::setFieldName(QString fieldName){
+    newField.setName(fieldName);
+    ui->attributeNameLineEdit->setText(fieldName);
+    ui->attributeNameLineEdit->setEnabled(false);
+}
+
+void AddAttributeWindow::setFieldData(QList<QString> *fieldData){
+    this->fieldData = fieldData;
 }
 
 FieldInfo* AddAttributeWindow::getNewField(){
@@ -74,7 +85,11 @@ void AddAttributeWindow::addValue(){
         ui->scrollAreaWidgetContents->findChild<QComboBox*>("defaultValueComboBox")->addItem(valueName);
         tableWidget->setItem(newRowIndex,0,new QTableWidgetItem(valueName));
         tableWidget->setItem(newRowIndex,1,new QTableWidgetItem(value));
-        QPushButton *removeBtn = new QPushButton("Remove", tableWidget);
+        QPushButton *removeBtn = new QPushButton("", tableWidget);
+        QIcon removeIcon(QIcon::fromTheme(QStringLiteral(":/icons/Delete.png")));
+        removeBtn->setIcon(removeIcon);
+        removeBtn->setToolTip("Remove");
+        removeBtn->setFlat(true);
         removeBtn->setProperty("id",newValueID);
         signalMapper->setMapping(removeBtn,newValueID);
         QObject::connect(removeBtn,SIGNAL(clicked()),signalMapper,SLOT(map()));
@@ -86,6 +101,7 @@ void AddAttributeWindow::addValue(){
         QMessageBox msg(QMessageBox::Warning, "Failed to add value", errorString);
         msg.exec();
     }
+//    tableWidget->resizeColumnsToContents();
 }
 
 void AddAttributeWindow::removeValue(int id){
@@ -102,10 +118,11 @@ void AddAttributeWindow::removeValue(int id){
                     break;
                 }
             }
-            tableWidget->removeRow(row);
+            tableWidget->model()->removeRow(row);
             break;
         }
     }
+//    tableWidget->resizeColumnsToContents();
 }
 
 void AddAttributeWindow::populateWindow(const QString fieldType)
@@ -142,6 +159,7 @@ void AddAttributeWindow::populateWindow(const QString fieldType)
     minimumValueSpinBox->setMaximum(1000000);
     connect(minimumValueSpinBox,SIGNAL(valueChanged(int)),this,SLOT(setDefaultMin(int)));
     minimumValueSpinBox->setObjectName(QStringLiteral("minimumValueSpinBox"));
+    minimumValueSpinBox->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     formLayout->setWidget(1, QFormLayout::FieldRole, minimumValueSpinBox);
 
     QLabel *maximumValueLabel = new QLabel("Maximum Value",frame);
@@ -154,6 +172,7 @@ void AddAttributeWindow::populateWindow(const QString fieldType)
     maximumValueSpinBox->setValue(1000000);
     connect(maximumValueSpinBox,SIGNAL(valueChanged(int)),this,SLOT(setDefaultMax(int)));
     maximumValueSpinBox->setObjectName(QStringLiteral("maximumValueSpinBox"));
+    maximumValueSpinBox->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     formLayout->setWidget(2, QFormLayout::FieldRole, maximumValueSpinBox);
 
     QLabel *attributeValueNameLabel = new QLabel("Attribute Value Name",frame);
@@ -172,7 +191,10 @@ void AddAttributeWindow::populateWindow(const QString fieldType)
     attributeValueLineEdit->setObjectName(QStringLiteral("attributeValueLineEdit"));
     formLayout->setWidget(4, QFormLayout::FieldRole, attributeValueLineEdit);
 
-    QPushButton *pushButton = new QPushButton("Add Value",frame);
+    QPushButton *pushButton = new QPushButton(" Add Value",frame);
+    QIcon addIcon(QIcon::fromTheme(QStringLiteral(":/icons/800px_COLOURBOX5697436.png")));
+    pushButton->setIcon(addIcon);
+    pushButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     pushButton->setObjectName(QStringLiteral("addValue"));
     connect(pushButton,SIGNAL(clicked()),this,SLOT(addValue()));
     formLayout->setWidget(5, QFormLayout::FieldRole, pushButton);
@@ -187,14 +209,18 @@ void AddAttributeWindow::populateWindow(const QString fieldType)
     QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
     tableWidget->setHorizontalHeaderItem(2, __qtablewidgetitem2);
     tableWidget->setObjectName(QStringLiteral("tableWidget"));
-    tableWidget->horizontalHeader()->setDefaultSectionSize(250);
+//    tableWidget->horizontalHeader()->setDefaultSectionSize(100);
     tableWidget->horizontalHeader()->setStretchLastSection(true);
     QList<QString> *headerLabels = new QList<QString>();
     headerLabels->push_back("Name");
     headerLabels->push_back("Value");
     headerLabels->push_back("");
     tableWidget->setHorizontalHeaderLabels(*headerLabels);
+    tableWidget->setColumnWidth(0,150);
+    tableWidget->setColumnWidth(1,150);
+    tableWidget->setColumnWidth(2,40);
     tableWidget->verticalHeader()->setStretchLastSection(false);
+    tableWidget->verticalHeader()->hide();
     ui->gridLayout_2->addWidget(tableWidget, 2, 0, 1, 1);
 
     ui->scrollArea->setWidget(ui->scrollAreaWidgetContents);
@@ -208,6 +234,7 @@ void AddAttributeWindow::populateWindow(const QString fieldType)
 
         QLineEdit *defaultValueLineEdit = new QLineEdit(frame);
         defaultValueLineEdit->setObjectName(QStringLiteral("defaultValueLineEdit"));
+//        defaultValueLineEdit->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         formLayout->setWidget(0, QFormLayout::FieldRole, defaultValueLineEdit);
 
         minimumValueSpinBox->setEnabled(false);
@@ -217,6 +244,7 @@ void AddAttributeWindow::populateWindow(const QString fieldType)
         pushButton->setEnabled(false);
         tableWidget->setEnabled(false);
 
+        ui->canBeEmptyCheckBox->setEnabled(true);
     }else if(fieldType.compare(QString("Integer")) == 0)
     {
         QLabel *defaultValueLabel = new QLabel("Default Value", frame);
@@ -227,12 +255,16 @@ void AddAttributeWindow::populateWindow(const QString fieldType)
         defaultValueSpinBox->setMinimum(0);
         defaultValueSpinBox->setMaximum(1000000);
         defaultValueSpinBox->setObjectName(QStringLiteral("defaultValueSpinBox"));
+        defaultValueSpinBox->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         formLayout->setWidget(0, QFormLayout::FieldRole, defaultValueSpinBox);
 
         attributeValueNameLineEdit->setEnabled(false);
         attributeValueLineEdit->setEnabled(false);
         pushButton->setEnabled(false);
         tableWidget->setEnabled(false);
+
+        ui->canBeEmptyCheckBox->setEnabled(false);
+        ui->canBeEmptyCheckBox->setChecked(false);
     }else if(fieldType.compare(QString("Drop Down")) == 0)
     {
         QLabel *defaultValueLabel = new QLabel("Default Value", frame);
@@ -241,10 +273,13 @@ void AddAttributeWindow::populateWindow(const QString fieldType)
 
         QComboBox *defaultValueComboBox = new QComboBox(frame);
         defaultValueComboBox->setObjectName(QStringLiteral("defaultValueComboBox"));
+//        defaultValueComboBox->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         formLayout->setWidget(0, QFormLayout::FieldRole, defaultValueComboBox);
 
         minimumValueSpinBox->setEnabled(false);
         maximumValueSpinBox->setEnabled(false);
+
+        ui->canBeEmptyCheckBox->setEnabled(true);
     }else if(fieldType.compare(QString("Boolean")) == 0)
     {
         QLabel *defaultValueLabel = new QLabel("Default Value", frame);
@@ -255,6 +290,7 @@ void AddAttributeWindow::populateWindow(const QString fieldType)
         defaultValueComboBox->addItem("False");
         defaultValueComboBox->addItem("True");
         defaultValueComboBox->setObjectName(QStringLiteral("defaultValueComboBox"));
+        defaultValueComboBox->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         formLayout->setWidget(0, QFormLayout::FieldRole, defaultValueComboBox);
 
         minimumValueSpinBox->setEnabled(false);
@@ -263,57 +299,66 @@ void AddAttributeWindow::populateWindow(const QString fieldType)
         attributeValueLineEdit->setEnabled(false);
         pushButton->setEnabled(false);
         tableWidget->setEnabled(false);
+
+        ui->canBeEmptyCheckBox->setEnabled(false);
+        ui->canBeEmptyCheckBox->setChecked(false);
     }
 }
 
 void AddAttributeWindow::saveData(){
     QTableWidget *tableWidget = ui->scrollAreaWidgetContents->findChild<QTableWidget*>("tableWidget");
-    this->newField.setName(ui->attributeNameLineEdit->text());
-    this->newField.setDisplayName(ui->attributeDisplayNameLineEdit->text());
-    if(ui->valueTypeComboBox->itemText(ui->valueTypeComboBox->currentIndex()).compare(QString("Text")) == 0)
-    {
-        this->newField.setFieldType(FieldType::Text);
-        this->newField.setDefaultVal(ui->scrollAreaWidgetContents->findChild<QLineEdit*>("defaultValueLineEdit")->text());
+    if((tableWidget->rowCount() > 0 && ui->valueTypeComboBox->itemText(ui->valueTypeComboBox->currentIndex()).compare(QString("Drop Down")) == 0) ||
+            (tableWidget->rowCount() == 0 && ui->valueTypeComboBox->itemText(ui->valueTypeComboBox->currentIndex()).compare(QString("Drop Down")) != 0)){
+        this->newField.setName(ui->attributeNameLineEdit->text());
+        this->newField.setDisplayName(ui->attributeDisplayNameLineEdit->text());
+        if(ui->valueTypeComboBox->itemText(ui->valueTypeComboBox->currentIndex()).compare(QString("Text")) == 0)
+        {
+            this->newField.setFieldType(FieldType::Text);
+            this->newField.setDefaultVal(ui->scrollAreaWidgetContents->findChild<QLineEdit*>("defaultValueLineEdit")->text());
 
-    }
-    else if(ui->valueTypeComboBox->itemText(ui->valueTypeComboBox->currentIndex()).compare(QString("Integer")) == 0)
-    {
-        this->newField.setFieldType(FieldType::Integer);
-        this->newField.setDefaultVal(ui->scrollAreaWidgetContents->findChild<QSpinBox*>("defaultValueSpinBox")->text());
-        this->newField.setMinRange(ui->scrollAreaWidgetContents->findChild<QSpinBox*>("minimumValueSpinBox")->text().toInt());
-        this->newField.setMaxRange(ui->scrollAreaWidgetContents->findChild<QSpinBox*>("maximumValueSpinBox")->text().toInt());
-    }
-    else if(ui->valueTypeComboBox->itemText(ui->valueTypeComboBox->currentIndex()).compare(QString("Drop Down")) == 0)
-    {
-        this->newField.setFieldType(FieldType::DropDown);
-        this->newField.setDefaultVal(ui->scrollAreaWidgetContents->findChild<QComboBox*>("defaultValueComboBox")->currentText());
-        for (int row=0;row< tableWidget->rowCount();row++) {
-            QString name =  tableWidget->item(row,0)->text();
-            QString value =  tableWidget->item(row,1)->text();
-            this->newField.dropDownValMap()->insert(name,value);
         }
-    }
-    else if(ui->valueTypeComboBox->itemText(ui->valueTypeComboBox->currentIndex()).compare(QString("Boolean")) == 0)
-    {
-        this->newField.setFieldType(FieldType::Bool);
-        this->newField.setDefaultVal(ui->scrollAreaWidgetContents->findChild<QComboBox*>("defaultValueComboBox")->currentText());
-    }
-    this->newField.setIsMandetory(ui->mandatoryAttributeCheckBox->isChecked());
-    this->newField.setNullable(ui->canBeEmptyCheckBox->isChecked());
-    TableController *tableController = (TableController*)this->tableWidget->property("tableController").value<void*>();
-    if(tableController)
-    {
-        QString returnString = tableController->addAttributeToModel(&(this->newField));
-        if(returnString.compare(QString("submitted")) == 0){
-            qDebug() << "attribute added to model succesfully!";
-            FieldInfo *validatedField = CacheConfig::getInstance()->columnFieldList()->back();
-            tableController->addAttributeToTableView(validatedField);
-            qDebug() << "attribute added to table widget successfully";
-            accept();
-        }else{
-            qDebug() <<  "Failed to submit attribute data";
-            QMessageBox msg(QMessageBox::Warning, "Failed to submit form", returnString);
-            msg.exec();
+        else if(ui->valueTypeComboBox->itemText(ui->valueTypeComboBox->currentIndex()).compare(QString("Integer")) == 0)
+        {
+            this->newField.setFieldType(FieldType::Integer);
+            this->newField.setDefaultVal(ui->scrollAreaWidgetContents->findChild<QSpinBox*>("defaultValueSpinBox")->text());
+            this->newField.setMinRange(ui->scrollAreaWidgetContents->findChild<QSpinBox*>("minimumValueSpinBox")->text().toInt());
+            this->newField.setMaxRange(ui->scrollAreaWidgetContents->findChild<QSpinBox*>("maximumValueSpinBox")->text().toInt());
         }
+        else if(ui->valueTypeComboBox->itemText(ui->valueTypeComboBox->currentIndex()).compare(QString("Drop Down")) == 0)
+        {
+            this->newField.setFieldType(FieldType::DropDown);
+            this->newField.setDefaultVal(ui->scrollAreaWidgetContents->findChild<QComboBox*>("defaultValueComboBox")->currentText());
+            for (int row=0;row< tableWidget->rowCount();row++) {
+                QString name =  tableWidget->item(row,0)->text();
+                QString value =  tableWidget->item(row,1)->text();
+                this->newField.dropDownValMap()->insert(name,value);
+            }
+        }
+        else if(ui->valueTypeComboBox->itemText(ui->valueTypeComboBox->currentIndex()).compare(QString("Boolean")) == 0)
+        {
+            this->newField.setFieldType(FieldType::Bool);
+            this->newField.setDefaultVal(ui->scrollAreaWidgetContents->findChild<QComboBox*>("defaultValueComboBox")->currentText());
+        }
+        this->newField.setIsMandetory(ui->mandatoryAttributeCheckBox->isChecked());
+        this->newField.setNullable(ui->canBeEmptyCheckBox->isChecked());
+        TableController *tableController = (TableController*)this->tableWidget->property("tableController").value<void*>();
+        if(tableController)
+        {
+            QString returnString = tableController->addAttributeToModel(&(this->newField));
+            if(returnString.compare(QString("submitted")) == 0){
+                qDebug() << "attribute added to model succesfully!";
+                FieldInfo *validatedField = tableController->getConfig()->columnFieldList()->back();
+                tableController->addAttributeToTableView(validatedField, fieldData);
+                qDebug() << "attribute added to table widget successfully";
+                accept();
+            }else{
+                qDebug() <<  "Failed to submit attribute data";
+                QMessageBox msg(QMessageBox::Warning, "Failed to submit form", returnString);
+                msg.exec();
+            }
+        }
+    }else{
+        QMessageBox msg(QMessageBox::Warning, "Failed to submit form", "Insert at least one name-value pair");
+        msg.exec();
     }
 }

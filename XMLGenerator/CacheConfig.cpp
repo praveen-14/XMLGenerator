@@ -16,8 +16,6 @@
 #define XML_MAX_RANGE_PROPERTY	"maxRange"
 #define XML_ENUM_FILE_PROPERTY	"enumFile"
 
-CacheConfig CacheConfig::m_instance(nullptr);
-
 CacheConfig::CacheConfig(QObject *parent)
 	: QObject(parent)
 {
@@ -83,9 +81,9 @@ void CacheConfig::addColumnField(FieldInfo *field)
 //    file.close();
 }
 
-bool CacheConfig::init()
+bool CacheConfig::init(QString filePath)
 {
-    QFile inputFile("F:/Projects/My Projects/build-XMLGenerator-Desktop_Qt_5_9_0_MinGW_32bit-Debug/CacheXMLConfigs.xml");
+    QFile inputFile(filePath);
     if (inputFile.open(QIODevice::ReadOnly))
         {
             QXmlStreamReader reader(&inputFile);
@@ -296,8 +294,7 @@ void CacheConfig::loadEnumsFromFile(QString file, FieldInfo* info)
 		}
 		else
 		{
-			QMessageBox msg(QMessageBox::Information, "Load Enum File", "Enums successfully Loaded");
-			msg.exec();
+            qDebug() << "enum loaded successfully";
 		}
 	}
 	else

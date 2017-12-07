@@ -26,8 +26,12 @@ class Table
         void addField(QString field);
         QList<QString>* getAllFields();
 
-        QString addAttributeToModel(FieldInfo *newField);
-        QString addFieldToModel(QMap<QString,QString> *fieldData);
+//        void addNewEnum(QString newEnum);
+        void removeEnum(int index);
+        QList<QString>* getNewEnums();
+
+        QString addAttributeToModel(FieldInfo *newField, CacheConfig *config);
+        QString addFieldToModel(QMap<QString,QString> *fieldData, CacheConfig *config);
 
         QList<TableRow*>* getRows();
         QMap<TableCell*,QString>* getErrorsMap();
@@ -38,10 +42,15 @@ class Table
         void removeAttribute(int index);
         void removeField(int index);
 
+        QList<QString>* getAvailableAttributes();
+        void setAvailableAttributes(QList<QString> *availableAttributes);
+
     private:
         QList<TableRow*> tableRows;
         QList<QString> allAttributes;
         QList<QString> allFields;
         QMap<TableCell*,QString> errorsMap;
+        QList<QString> newEnums;
+        QList<QString> availableAttributes;
 };
 #endif // TABLE_H
