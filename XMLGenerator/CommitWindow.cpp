@@ -16,8 +16,16 @@ CommitWindow::~CommitWindow()
 
 void CommitWindow::commit()
 {
-    MainWindow::mainWindow->setCommitMessage(ui->mergeLabel->text() + ui->commitMessageLineEdit->text());
-    accept();
+    if(ui->commitMessageLineEdit->text().trimmed().size() > 0)
+    {
+        MainWindow::mainWindow->setCommitMessage(ui->mergeLabel->text() + ui->commitMessageLineEdit->text());
+        accept();
+    }
+    else
+    {
+        QMessageBox msg(QMessageBox::Warning, "Fail to commit", "Commit message cannot be empty.");
+        msg.exec();
+    }
 }
 
 void CommitWindow::mergeCommit()
