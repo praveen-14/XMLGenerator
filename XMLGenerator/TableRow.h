@@ -12,8 +12,6 @@ class TableRow
         ~TableRow();
         void addCell(TableCell *cell);
         QList<TableCell*>* getRowCells();
-//        void setRowIndex(int row);
     private:
         QList<TableCell*> rowCells;
-//        int rowIndex;
 };

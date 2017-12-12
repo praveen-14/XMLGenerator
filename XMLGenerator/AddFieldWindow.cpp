@@ -2,21 +2,26 @@
 #include "ui_AddFieldWindow.h"
 
 AddFieldWindow::AddFieldWindow(QWidget *parent, QTableWidget *tableWidget) :
-    QDialog(parent, Qt::Window ), ui(new Ui::AddFieldWindow) {
+    QDialog(parent, Qt::Window ), ui(new Ui::AddFieldWindow)
+{
     ui->setupUi(this);
     this->tableWidget = tableWidget;
     this->populateAttributes();
+    this->setFixedSize(QSize(this->width(), this->height()));
 }
-AddFieldWindow::~AddFieldWindow() {
+AddFieldWindow::~AddFieldWindow()
+{
     delete ui;
 }
 
-QMap<QString,QString>* AddFieldWindow::getWindowData(){
+QMap<QString,QString>* AddFieldWindow::getWindowData()
+{
     return &(this->windowData);
 }
 
-void AddFieldWindow::populateAttributes(){
-    TableController *tableController = (TableController*)this->tableWidget->property("tableController").value<void*>();
+void AddFieldWindow::populateAttributes()
+{
+    TableController *tableController = /*(TableController*)*/this->tableWidget->property("tableController").value<TableController*>();
     Table *table = tableController->getDataTable();
     QList<FieldInfo*> columnFields;
     foreach(QString attributeName, *(table->getAllAttributes()))
@@ -35,6 +40,7 @@ void AddFieldWindow::populateAttributes(){
         if(item->fieldType() != FieldType::Bool)
         {
             label = new QLabel(item->displayName(), this);
+            label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
         }
         switch (item->fieldType())
@@ -42,7 +48,7 @@ void AddFieldWindow::populateAttributes(){
         case FieldType::Text:
         {
             QLineEdit *lineEdit= new QLineEdit(item->defaultVal(), this);
-            lineEdit->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+            lineEdit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             lineEdit->setObjectName(item->name());
             ui->formLayout->addRow(label,lineEdit);
         }
@@ -51,7 +57,7 @@ void AddFieldWindow::populateAttributes(){
         case FieldType::DropDown:
         {
             QComboBox *combo = new QComboBox(this);
-            combo->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+            combo->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             for (QMap<QString, QString>::iterator dropItem = item->dropDownValMap()->begin(); dropItem != item->dropDownValMap()->end();++dropItem)
             {
                 combo->addItem(dropItem.key(), dropItem.value());
@@ -63,16 +69,16 @@ void AddFieldWindow::populateAttributes(){
             combo->setCurrentText(item->defaultVal());
             combo->setObjectName(item->name());
             ui->formLayout->addRow(label,combo);
-
         }
             break;
         case FieldType::Integer:
         {
             QSpinBox *spinBox = new QSpinBox(this);
-            spinBox->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+            spinBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             spinBox->setMaximum(item->maxRange());
             spinBox->setMinimum(item->minRange());
-            if(!item->isMandetory()){
+            if(!item->isMandetory())
+            {
                 spinBox->setMinimum(item->minRange()-1);
                 spinBox->setSpecialValueText("(Not Applicable)");
             }
@@ -92,8 +98,9 @@ void AddFieldWindow::populateAttributes(){
         if(item->fieldType() == FieldType::Bool)
         {
             QCheckBox *checkBox = new QCheckBox(this);
-            checkBox->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-            if(!item->isMandetory()){
+            checkBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            if(!item->isMandetory())
+            {
                 checkBox->setTristate(true);
             }
             checkBox->setObjectName(item->name());
@@ -105,7 +112,7 @@ void AddFieldWindow::populateAttributes(){
             formLayout1->setObjectName(QStringLiteral("formLayout"));
             formLayout1->setContentsMargins(0, 0, 0, 0);
             QLabel *label = new QLabel(widget);
-            label->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+            label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             label->setObjectName(item->name() + QStringLiteral("Label"));
             label->setText(item->displayName());
 
@@ -120,9 +127,11 @@ void AddFieldWindow::populateAttributes(){
     }
 }
 
-void AddFieldWindow::saveData(){
-    TableController *tableController = (TableController*)this->tableWidget->property("tableController").value<void*>();
-    if(tableController){
+void AddFieldWindow::saveData()
+{
+    TableController *tableController = /*(TableController*)*/this->tableWidget->property("tableController").value<TableController*>();
+    if(tableController)
+    {
         foreach(FieldInfo * item, *(tableController->getConfig()->columnFieldList()))
         {
             switch (item->fieldType())
@@ -130,7 +139,8 @@ void AddFieldWindow::saveData(){
                 case FieldType::Text:
                 {
                     QLineEdit *lineEdit = ui->scrollAreaWidgetContents->findChild<QLineEdit*>(item->name());
-                    if(lineEdit){
+                    if(lineEdit)
+                    {
                         windowData.insert(item->name(),lineEdit->text());
                     }
                 }
@@ -138,7 +148,8 @@ void AddFieldWindow::saveData(){
                 case FieldType::DropDown:
                 {
                     QComboBox *combo = ui->scrollAreaWidgetContents->findChild<QComboBox*>(item->name());
-                    if(combo){
+                    if(combo)
+                    {
                         windowData.insert(item->name(),combo->currentText());
                     }
                 }
@@ -146,12 +157,17 @@ void AddFieldWindow::saveData(){
                 case FieldType::Bool:
                 {
                     QCheckBox *checkBox = ui->scrollAreaWidgetContents->findChild<QCheckBox*>(item->name());
-                    if(checkBox){
+                    if(checkBox)
+                    {
                         if(checkBox->checkState() == Qt::Checked){
                             windowData.insert(item->name(),"true");
-                        }else if(checkBox->checkState() == Qt::PartiallyChecked){
+                        }
+                        else if(checkBox->checkState() == Qt::PartiallyChecked)
+                        {
                             windowData.insert(item->name(),"(Not Applicable)");
-                        }else{
+                        }
+                        else
+                        {
                             windowData.insert(item->name(),"false");
                         }
                     }
@@ -160,13 +176,16 @@ void AddFieldWindow::saveData(){
                 case FieldType::Integer:
                 {
                     QSpinBox *spinBox = ui->scrollAreaWidgetContents->findChild<QSpinBox*>(item->name());
-                    if(spinBox){
-                        if(spinBox->specialValueText().compare("") != 0 && spinBox->value() == spinBox->minimum()){
+                    if(spinBox)
+                    {
+                        if(spinBox->specialValueText().compare("") != 0 && spinBox->value() == spinBox->minimum())
+                        {
                             windowData.insert(item->name(),"(Not Applicable)");
-                        }else{
+                        }
+                        else
+                        {
                             windowData.insert(item->name(),spinBox->text());
                         }
-
                     }
                 }
                 break;
@@ -174,15 +193,17 @@ void AddFieldWindow::saveData(){
         }
         QMap<QString,QString> *windowData = this->getWindowData();
         QString returnValue = tableController->addFieldToModel(windowData);
-        if(returnValue.compare("submitted") == 0){
+        if(returnValue.compare("submitted") == 0)
+        {
             qDebug() << "Successfully added the field to the model";
             tableController->addFieldToTableView(tableController->getDataTable()->getAllFields()->count()-1);
             accept();
-        }else {
+        }
+        else
+        {
             this->windowData.clear();
             QMessageBox msg(QMessageBox::Warning, "Failed to submit form", returnValue);
             msg.exec();
         }
-
     }
 }

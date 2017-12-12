@@ -13,6 +13,7 @@ AddEnum::AddEnum(QWidget *parent, QString *filePath) :
     ui->tableWidget->setColumnWidth(1,162);
     ui->tableWidget->setColumnWidth(2,40);
     newValueID = 0;
+    this->setFixedSize(QSize(this->width(), this->height()));
 }
 
 AddEnum::~AddEnum()
@@ -22,7 +23,6 @@ AddEnum::~AddEnum()
 
 void AddEnum::makeNecessary()
 {
-//    ui->buttonBox->setStandardButtons(QDialogButtonBox::Ok);
     Qt::WindowFlags flags = windowFlags();
     flags &= ~Qt::WindowCloseButtonHint;
     this->setWindowFlags(flags);
@@ -33,32 +33,39 @@ void AddEnum::makeUnclosable()
     ui->buttonBox->button(QDialogButtonBox::Cancel)->setEnabled(false);
 }
 
-void AddEnum::setEnumName(QString enumName){
+void AddEnum::setEnumName(QString enumName)
+{
     ui->nameLineEdit->setText(enumName);
     ui->nameLineEdit->setEnabled(false);
 }
 
-void AddEnum::addValue(){
-//    ui->formLayout->itemAt()
+void AddEnum::addValue()
+{
     QString valueName = ui->groupBox_2->findChild<QLineEdit*>("valueNameLineEdit")->text();
     QString value = ui->groupBox_2->findChild<QLineEdit*>("valueLineEdit")->text();
     QTableWidget *tableWidget = ui->tableWidget;
     QString errorString;
-    if(valueName.compare("") == 0){
+    if(valueName.compare("") == 0)
+    {
         errorString.append("Name of the value cannot be empty. \n");
     }
-    if(value.compare("") == 0){
+    if(value.compare("") == 0)
+    {
         errorString.append("Value cannot be empty. \n");
     }
-    for(int row = 0; row<tableWidget->rowCount(); row++){
-        if(tableWidget->item(row,0)->text().compare(valueName) == 0){
+    for(int row = 0; row<tableWidget->rowCount(); row++)
+    {
+        if(tableWidget->item(row,0)->text().compare(valueName) == 0)
+        {
             errorString.append("Value name '"+ valueName + "' already exists \n");
         }
-        if(tableWidget->item(row,1)->text().compare(value) == 0){
+        if(tableWidget->item(row,1)->text().compare(value) == 0)
+        {
             errorString.append("Value '"+ value + "' already exists \n");
         }
     }
-    if(errorString.length() == 0){
+    if(errorString.length() == 0)
+    {
         int newRowIndex = tableWidget->rowCount();
         tableWidget->setRowCount(newRowIndex+1);
         ui->groupBox_2->findChild<QLineEdit*>("valueNameLineEdit")->clear();
@@ -74,17 +81,18 @@ void AddEnum::addValue(){
         signalMapper->setMapping(removeBtn,newValueID);
         QObject::connect(removeBtn,SIGNAL(clicked()),signalMapper,SLOT(map()));
         QObject::connect(signalMapper, SIGNAL(mapped(int)),this, SLOT(removeValue(int)));
-    //    connect(ui->tableWidget, SIGNAL(clicked(const QModelIndex &)), this, SLOT(removeValue(const QModelIndex &)));
         tableWidget->setCellWidget(newRowIndex,2,removeBtn);
         newValueID++;
-    }else{
+    }
+    else
+    {
         QMessageBox msg(QMessageBox::Warning, "Failed to add value", errorString);
         msg.exec();
     }
-//    tableWidget->resizeColumnsToContents();
 }
 
-void AddEnum::removeValue(int id){
+void AddEnum::removeValue(int id)
+{
     QTableWidget *tableWidget = ui->tableWidget;
     for(int row=0; row < tableWidget->rowCount(); row++)
     {
@@ -94,34 +102,42 @@ void AddEnum::removeValue(int id){
             break;
         }
     }
-//    tableWidget->resizeColumnsToContents();
 }
 
-void AddEnum::saveEnum(){
+void AddEnum::saveEnum()
+{
     QString errorString;
     CacheConfig *config = MainWindow::mainWindow->getTableControllerMap()->find(*filePath).value()->getConfig();
     FieldInfo *enumField = config->columnFieldList()->at(config->posForColumnName("enumName"));
     QMap<QString,QString> *enumValues = enumField->dropDownValMap();
     QString enumName = ui->nameLineEdit->text();
-    if(enumName.compare("") == 0){
+    if(enumName.compare("") == 0)
+    {
         errorString.append("Enum name cannot be empty.\n");
     }
-    if(ui->tableWidget->rowCount() == 0){
+    if(ui->tableWidget->rowCount() == 0)
+    {
         errorString.append("Add at least one name-value pair.\n");
     }
     QMap<QString,QString>::iterator enumValuesIterator = enumValues->begin();
-    if(enumValuesIterator != enumValues->end()){
-        if(enumValuesIterator.key().compare(enumName) == 0){
+    if(enumValuesIterator != enumValues->end())
+    {
+        if(enumValuesIterator.key().compare(enumName) == 0)
+        {
             errorString.append("Enum name already exists!");
         }
         enumValuesIterator++;
     }
-    if(errorString.size() > 0){
+    if(errorString.size() > 0)
+    {
         QMessageBox msg(QMessageBox::Warning, "Failed to submit form", errorString);
         msg.exec();
-    }else{
+    }
+    else
+    {
         Enum *newEnum = new Enum(enumName);
-        for(int row = 0; row < ui->tableWidget->rowCount(); row++){
+        for(int row = 0; row < ui->tableWidget->rowCount(); row++)
+        {
             QString value = ui->tableWidget->item(row,1)->text();
             QString name = ui->tableWidget->item(row,0)->text();
             newEnum->addValue(value, name);

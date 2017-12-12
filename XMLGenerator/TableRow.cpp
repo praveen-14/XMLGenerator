@@ -11,17 +11,10 @@ TableRow::~TableRow()
 
 }
 
-//void TableRow::setRowIndex(int row){
-//    this->rowIndex = row;
-//}
-
-QList<TableCell*>* TableRow::getRowCells(){
+QList<TableCell*>* TableRow::getRowCells()
+{
     return &rowCells;
 }
-
-//int TableRow::getRowIndex(){
-//    return rowIndex;
-//}
 
 void TableRow::addCell(TableCell *cell)
 {

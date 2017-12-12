@@ -34,9 +34,11 @@ QString Version::getVersionID()
 
 int Version::size(Version *root, int currentSize)
 {
-    if(root){
+    if(root)
+    {
         currentSize++;
-        foreach (Version *subVersion, *(root->getSubVersions())) {
+        foreach (Version *subVersion, *(root->getSubVersions()))
+        {
             currentSize = size(subVersion, currentSize);
         }
     }
@@ -50,18 +52,17 @@ void Version::addSubVersions(QList<Version*> versions)
 
 Version* Version::findVersion(QString commitID)
 {
-    if(this->getCommitID().compare(commitID) == 0){
+    if(this->getCommitID().compare(commitID) == 0)
+    {
         return this;
     }
-    foreach (Version *version, subVersions) {
-//        if(version->getCommitID().compare(commitID) == 0){
-//            return version;
-//        }else{
+    foreach (Version *version, subVersions)
+    {
         Version *foundVersion = version->findVersion(commitID);
-        if(foundVersion){
+        if(foundVersion)
+        {
             return foundVersion;
         }
-//        }
     }
     return nullptr;
 }

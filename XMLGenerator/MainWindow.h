@@ -15,6 +15,7 @@
 #include <CommitWindow.h>
 #include <QMovie>
 #include <QTreeWidgetItemIterator>
+#include <QProgressBar>
 
 class Table;
 class TableController;

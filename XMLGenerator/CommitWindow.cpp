@@ -6,6 +6,7 @@ CommitWindow::CommitWindow(QWidget *parent) :
     ui(new Ui::CommitWindow)
 {
     ui->setupUi(this);
+    this->setFixedSize(QSize(this->width(), this->height()));
 }
 
 CommitWindow::~CommitWindow()
@@ -15,6 +16,19 @@ CommitWindow::~CommitWindow()
 
 void CommitWindow::commit()
 {
-    MainWindow::mainWindow->setCommitMessage(ui->commitMessageLineEdit->text());
+    MainWindow::mainWindow->setCommitMessage(ui->mergeLabel->text() + ui->commitMessageLineEdit->text());
     accept();
+}
+
+void CommitWindow::mergeCommit()
+{
+    ui->mergeLabel->setText("product_merge_");
+}
+
+void CommitWindow::makeNecessary()
+{
+    Qt::WindowFlags flags = windowFlags();
+    flags &= ~Qt::WindowCloseButtonHint;
+    this->setWindowFlags(flags);
+    ui->buttonBox->button(QDialogButtonBox::Cancel)->setEnabled(false);
 }

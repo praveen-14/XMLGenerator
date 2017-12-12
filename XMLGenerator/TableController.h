@@ -27,7 +27,7 @@ class TableController : public QObject
     Q_OBJECT
 
     public:
-        explicit TableController(QWidget *tableWidgetParent = 0, CacheConfig * config = 0);
+        explicit TableController(QWidget *tableWidgetParent = 0, CacheConfig * config = 0, QObject *parent = 0);
         ~TableController();
 
         Table* getDataTable();
@@ -35,7 +35,6 @@ class TableController : public QObject
         QList<Change*>* getChanges();
         XMLFileData* getProductFile();
         XMLFileData* getUnresolvedProductFile();
-//        XMLFileData* getOldProductFile();
         CacheConfig* getConfig();
         bool isNewProject();
         bool isNewProduct();
@@ -58,7 +57,6 @@ class TableController : public QObject
         void addNewAttributes(XMLFileData *xmlData);
 
         QString updateMetaData(QList<QList<QList<QString>>> *updatedMetaData);
-//        QString getColorCode(QString value, FieldInfo *field);
         QList<QList<QString>>* getMetaCacheData();
         QList<QList<QString>>* getMetaMessageData();
         QList<QList<QString>>* getDefaultSortList();
@@ -67,7 +65,6 @@ class TableController : public QObject
         void setMetaMessageData(QList<QList<QString>>* metaMessageData);
         void setDefaultSortList(QList<QList<QString>>* defaultSortList);
         void setProductFile(XMLFileData *fileData);
-//        void setOldProductFile(XMLFileData *oldProductFile);
         void setNewProject(bool newProject);
         void setNewProduct(bool newProduct);
         void setCommitID(QString commitID);
@@ -94,7 +91,6 @@ class TableController : public QObject
         QList<Change*> changes;
         XMLFileData productFile;
         XMLFileData unresolvedProductFile;
-//        XMLFileData *oldProductFile;
         QList<Enum*> newEnums;
         CacheConfig *config;
         bool newProject;

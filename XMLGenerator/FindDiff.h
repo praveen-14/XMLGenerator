@@ -4,7 +4,6 @@
 #include <QDialog>
 #include <MainWindow.h>
 #include <QCheckBox>
-#include <CheckBoxHeader.h>
 #include <Change.h>
 #include <TableController.h>
 

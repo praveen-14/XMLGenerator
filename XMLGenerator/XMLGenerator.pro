@@ -41,7 +41,6 @@ SOURCES += \
     AddEnum.cpp \
     Enum.cpp \
     FindDiff.cpp \
-    CheckBoxHeader.cpp \
     Version.cpp \
     CommitWindow.cpp
 
@@ -61,7 +60,6 @@ HEADERS += \
     AddEnum.h \
     Enum.h \
     FindDiff.h \
-    CheckBoxHeader.h \
     Version.h \
     CommitWindow.h
 

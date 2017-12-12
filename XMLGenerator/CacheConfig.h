@@ -3,6 +3,8 @@
 #include "qxmlstream.h"
 #include "FieldInfo.h"
 #include <QDomDocument>
+#include <QFileInfo>
+#include <QDir>
 
 class CacheConfig : QObject
 {

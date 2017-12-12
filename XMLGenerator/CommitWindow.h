@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include <MainWindow.h>
+#include <QPushButton>
+
 
 namespace Ui {
 class CommitWindow;
@@ -15,6 +17,9 @@ class CommitWindow : public QDialog
 public:
     explicit CommitWindow(QWidget *parent = 0);
     ~CommitWindow();
+
+    void mergeCommit();
+    void makeNecessary();
 
 public slots:
     void commit();

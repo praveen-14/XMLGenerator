@@ -29,56 +29,6 @@ CacheConfig::~CacheConfig()
 void CacheConfig::addColumnField(FieldInfo *field)
 {
     m_columnFieldsList.append(field);
-//    QDomDocument doc("tempCacheConfig.xml");
-//    QFile file("F:/Projects/My Projects/build-XMLGenerator-Desktop_Qt_5_9_0_MinGW_32bit-Debug/CacheXMLConfigs.xml");
-//    if (!file.open(QIODevice::ReadOnly)) {
-//        qDebug() << "Cannot open the file";
-//        return;
-//    }
-//    // Parse file
-//    if (!doc.setContent(&file)) {
-//       qDebug() << "Cannot parse the content";
-//       file.close();
-//       return;
-//    }
-//    file.close();
-
-//    // Modify content
-//    QDomNodeList columnFieldsArray = elementsByTagName("column_fields");
-//    if (roots.size() < 1) {
-//       qDebug() << "Cannot find root";
-//       return;
-//    }
-//    QDomNode columnFieldNode = columnFieldsArray.at(0);
-//    QDomNode newNode = new QDomNode();
-//    QDomElement newElement = newNode.toElement();
-//    newElement.setAttribute("name",field->name());
-//    newElement.setAttribute("displayName",field->displayName());
-//    newElement.setAttribute("fieldType",FieldType(field->fieldType()));
-//    newElement.setAttribute("default",field->defaultVal());
-//    if(field->isMandetory()){
-//        newElement.setAttribute("isMandetory","true");
-//    }else
-//        newElement.setAttribute("isMandetory","false");
-//    if(field->nullable()){
-//        newElement.setAttribute("nullable","true");
-//    }else
-//        newElement.setAttribute("nullable","false");
-//    if(field->fieldType() == FieldType::Integer){
-//        newElement.setAttribute("minRan","false");
-//        newElement.setAttribute("nullable","false");
-//    }
-//    // Then do the same thing for somechild
-//    ...
-
-//    // Save content back to the file
-//    if (!file.open(QIODevice::Truncate | QIODevice::WriteOnly)) {
-//        qDebug() << "Basically, now we lost content of a file";
-//        return;
-//    }
-//    QByteArray xml = doc.toByteArray();
-//    file.write(xml);
-//    file.close();
 }
 
 bool CacheConfig::init(QString filePath)
@@ -257,10 +207,18 @@ void CacheConfig::populateFieldInfo(QXmlStreamReader* reader, QList<FieldInfo*>*
 
 void CacheConfig::loadEnumsFromFile(QString file, FieldInfo* info)
 {
-	QFile outputFile(file);
-	if (outputFile.open(QIODevice::ReadOnly))
+    QFile *outputFile;
+    if(QFile::exists(file))
+    {
+        outputFile = new QFile(file);
+    }
+    else
+    {
+        outputFile = new QFile(QDir::currentPath() + "/" + file);
+    }
+    if (outputFile->open(QIODevice::ReadOnly))
 	{
-		QXmlStreamReader reader(&outputFile);
+        QXmlStreamReader reader(outputFile);
 
 		bool enumFound = false;
 
@@ -285,11 +243,11 @@ void CacheConfig::loadEnumsFromFile(QString file, FieldInfo* info)
 			}
 
 		}
-		outputFile.close();
+        outputFile->close();
 
 		if (!enumFound)
 		{
-			QMessageBox msg(QMessageBox::Warning, "Fail to open File", "File is not in the correct format to load Enums");
+            QMessageBox msg(QMessageBox::Warning, "Fail to open File", "File is not in the correct format to load Enums");
 			msg.exec();
 		}
 		else
@@ -299,7 +257,7 @@ void CacheConfig::loadEnumsFromFile(QString file, FieldInfo* info)
 	}
 	else
 	{
-		QMessageBox msg(QMessageBox::Warning, "Fail to open File", outputFile.errorString());
+        QMessageBox msg(QMessageBox::Warning, "Fail to open File", /*fileInfo.path() + "\n" + */outputFile->errorString());
 		msg.exec();
 	}
 }
